@@ -1,0 +1,10 @@
+<resources>
+
+  <string name="app_name">Elevation Tester</string>
+  <string name="elevation_label">Elevation: %ddp</string>
+  <string name="y_shift_label">Y shift: %ddp</string>
+  <string name="scale_x_label">Scale X: %d%%</string>
+  <string name="scale_y_label">Scale Y: %d%%</string>
+  <string name="test_test_test">Test test test</string>
+
+</resources>

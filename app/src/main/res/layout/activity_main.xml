@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="me.seebrock3r.elevationtester.MainActivity">
+
+  <TextView
+    android:id="@+id/elevationLabel"
+    android:layout_width="0dp"
+    android:layout_height="24dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="8dp"
+    android:text="@string/elevation_label"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/guideline"
+    tools:text="Elevation: 0dp" />
+
+  <TextView
+    android:id="@+id/scaleXLabel"
+    android:layout_width="0dp"
+    android:layout_height="24dp"
+    android:layout_marginTop="16dp"
+    android:text="@string/scale_x_label"
+    app:layout_constraintStart_toStartOf="@+id/elevationLabel"
+    app:layout_constraintTop_toBottomOf="@+id/elevationLabel"
+    app:layout_constraintEnd_toStartOf="@id/guideline"
+    tools:text="Shrink X: 0%" />
+
+  <TextView
+    android:id="@+id/scaleYLabel"
+    android:layout_width="0dp"
+    android:layout_height="24dp"
+    android:layout_marginTop="16dp"
+    android:text="@string/scale_y_label"
+    app:layout_constraintStart_toStartOf="@+id/elevationLabel"
+    app:layout_constraintTop_toBottomOf="@+id/scaleXLabel"
+    app:layout_constraintEnd_toStartOf="@id/guideline"
+    tools:text="Shrink Y: 0%" />
+
+  <TextView
+    android:id="@+id/yShiftLabel"
+    android:layout_width="0dp"
+    android:layout_height="24dp"
+    android:layout_marginTop="16dp"
+    android:text="@string/y_shift_label"
+    app:layout_constraintStart_toStartOf="@+id/elevationLabel"
+    app:layout_constraintTop_toBottomOf="@+id/scaleYLabel"
+    app:layout_constraintEnd_toStartOf="@id/guideline"
+    tools:text="Y Shift: 0dp" />
+
+  <SeekBar
+    android:id="@+id/elevationBar"
+    android:layout_width="0dp"
+    android:layout_height="24dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="16dp"
+    android:max="64"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+  <SeekBar
+    android:id="@+id/scaleXBar"
+    android:layout_width="0dp"
+    android:layout_height="24dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="16dp"
+    android:max="200"
+    app:layout_constraintEnd_toEndOf="@+id/elevationBar"
+    app:layout_constraintTop_toBottomOf="@+id/elevationBar"
+    app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+  <SeekBar
+    android:id="@+id/scaleYBar"
+    android:layout_width="0dp"
+    android:layout_height="24dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="16dp"
+    android:max="200"
+    app:layout_constraintEnd_toEndOf="@+id/elevationBar"
+    app:layout_constraintTop_toBottomOf="@+id/scaleXBar"
+    app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+  <SeekBar
+    android:id="@+id/yShiftBar"
+    android:layout_width="0dp"
+    android:layout_height="24dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="16dp"
+    android:max="200"
+    app:layout_constraintStart_toStartOf="@+id/guideline"
+    app:layout_constraintTop_toBottomOf="@+id/scaleYBar"
+    app:layout_constraintEnd_toEndOf="@+id/elevationBar" />
+
+  <android.support.constraint.Guideline
+    android:id="@+id/guideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_begin="116dp" />
+
+  <Button
+    android:id="@+id/button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:background="@drawable/btn_colored_material"
+    android:textColor="#fff"
+    android:padding="32dp"
+    android:text="@string/test_test_test"
+    android:clickable="false"
+    android:focusable="false"
+    app:layout_constraintTop_toBottomOf="@+id/yShiftBar"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <SeekBar
+    android:id="@+id/yPositionBar"
+    android:layout_width="0dp"
+    android:layout_height="24dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:max="200"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
