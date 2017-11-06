@@ -20,13 +20,13 @@ class MainActivity : AppCompatActivity() {
 
         button.outlineProvider = outlineProvider
 
-        scaleXBar.setOnSeekBarChangeListener(object : BetterSeekListener {
+        xScaleBar.setOnSeekBarChangeListener(object : BetterSeekListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 setScaleX(progress)
             }
         })
 
-        scaleYBar.setOnSeekBarChangeListener(object : BetterSeekListener {
+        yScaleBar.setOnSeekBarChangeListener(object : BetterSeekListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 setScaleY(progress)
             }
@@ -44,50 +44,50 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        yPositionBar.setOnSeekBarChangeListener(object : BetterSeekListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                val shift = progress - seekBar.max / 2
-                button.translationY = shift * resources.displayMetrics.density
-            }
-        })
+//        yPositionBar.setOnSeekBarChangeListener(object : BetterSeekListener {
+//            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+//                val shift = progress - seekBar.max / 2
+//                button.translationY = shift * resources.displayMetrics.density
+//            }
+//        })
 
         setScaleX(0)
-        scaleXLabel.setOnClickListener { scaleXBar.progress = scaleXBar.max / 2 }
-        scaleYLabel.text = getString(R.string.scale_y_label, 0)
-        scaleYBar.progress = scaleYBar.max / 2
-        scaleXBar.progress = scaleXBar.max / 2
+        xScaleValue.setOnClickListener { xScaleBar.progress = xScaleBar.max / 2 }
+        yScaleValue.text = getString(R.string.y_scale_value, 0)
+        yScaleBar.progress = yScaleBar.max / 2
+        xScaleBar.progress = xScaleBar.max / 2
 
-        yShiftLabel.text = getString(R.string.y_shift_label, 0)
+        yShiftValue.text = getString(R.string.y_shift_value, 0)
         yShiftBar.progress = yShiftBar.max / 2
 
-        elevationLabel.text = getString(R.string.elevation_label, 0)
-        yPositionBar.progress = yPositionBar.max / 2
+        elevationValue.text = getString(R.string.elevation_value, 0)
+//        yPositionBar.progress = yPositionBar.max / 2
     }
 
     private fun setElevation(progress: Int) {
         button.elevation = progress * resources.displayMetrics.density
-        elevationLabel.text = getString(R.string.elevation_label, progress)
+        elevationValue.text = getString(R.string.elevation_value, progress)
     }
 
     private fun setScaleX(progress: Int) {
-        val scale = progress - scaleXBar.max / 2
+        val scale = progress - xScaleBar.max / 2
         outlineProvider.scaleX = 1 + scale / 100f
         button.invalidateOutline()
-        scaleXLabel.text = getString(R.string.scale_x_label, scale + 100)
+        xScaleValue.text = getString(R.string.x_scale_value, scale + 100)
     }
 
     private fun setScaleY(progress: Int) {
-        val scale = progress - scaleYBar.max / 2
+        val scale = progress - yScaleBar.max / 2
         outlineProvider.scaleY = 1 + scale / 100f
         button.invalidateOutline()
-        scaleYLabel.text = getString(R.string.scale_y_label, scale + 100)
+        yScaleValue.text = getString(R.string.y_scale_value, scale + 100)
     }
 
     private fun setShiftY(progress: Int) {
         val shift = progress - yShiftBar.max / 2
         outlineProvider.yShift = shift
         button.invalidateOutline()
-        yShiftLabel.text = getString(R.string.y_shift_label, shift)
+        yShiftValue.text = getString(R.string.y_shift_value, shift)
     }
 
     inner class OutlineProvider(private val rect: Rect = Rect(), var scaleX: Float, var scaleY: Float, var yShift: Int) : ViewOutlineProvider() {

@@ -1,10 +1,16 @@
 <resources>
 
-  <string name="app_name">Elevation Tester</string>
-  <string name="elevation_label">Elevation: %ddp</string>
-  <string name="y_shift_label">Y shift: %ddp</string>
-  <string name="scale_x_label">Scale X: %d%%</string>
-  <string name="scale_y_label">Scale Y: %d%%</string>
-  <string name="test_test_test">Test test test</string>
+  <string name="app_name">Uplift</string>
+
+  <string name="elevation_label">Elevation</string>
+  <string name="elevation_value">%ddp</string>
+  <string name="x_scale_label">Scale X</string>
+  <string name="x_scale_value">%d%%</string>
+  <string name="y_scale_label">Scale Y</string>
+  <string name="y_scale_value">%d%%</string>
+  <string name="y_shift_label">Shift Y</string>
+  <string name="y_shift_value">%ddp</string>
+
+  <string name="test_test_test">Drag up and down</string>
 
 </resources>

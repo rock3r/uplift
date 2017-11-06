@@ -1,11 +1,32 @@
 <resources>
 
-  <!-- Base application theme. -->
-  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <!-- Customize your theme here. -->
+  <style name="Theme.Uplift" parent="Theme.AppCompat.Light.DarkActionBar">
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:textColorPrimary">@color/textPrimary</item>
+    <item name="android:textColorSecondary">@color/textSecondary</item>
+  </style>
+
+  <style name="None" />
+
+  <style name="Widget.Uplift" parent="None" />
+
+  <style name="Widget.Uplift.SeekBar" parent="Widget.AppCompat.SeekBar">
+    <item name="android:thumb">@drawable/seekbar_thumb</item>
+    <item name="android:progressDrawable">@drawable/seekbar_track</item>
+  </style>
+
+  <style name="TextAppearance.Uplift.SeekBarLabel" parent="None">
+    <item name="android:textSize">@dimen/seekbar_label_text</item>
+    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:fontFamily">sans-serif</item>
+  </style>
+
+  <style name="TextAppearance.Uplift.SeekBarValue" parent="None">
+    <item name="android:textSize">@dimen/seekbar_label_text</item>
+    <item name="android:textColor">?android:textColorSecondary</item>
+    <item name="android:fontFamily">sans-serif-medium</item>
   </style>
 
 </resources>

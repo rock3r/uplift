@@ -2,5 +2,13 @@
 <resources>
 
   <dimen name="control_corner_material">2dp</dimen>
+  <dimen name="text_normal">14sp</dimen>
+
+
+  <dimen name="seekbar_track_background_height">4dp</dimen>
+  <dimen name="seekbar_track_progress_height">@dimen/seekbar_track_background_height</dimen>
+
+  <dimen name="seekbar_label_text">@dimen/text_normal</dimen>
+
 
 </resources>

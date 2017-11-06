@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#3F51B5</color>
-  <color name="colorPrimaryDark">#303F9F</color>
-  <color name="colorAccent">#FF4081</color>
+  <color name="colorPrimary">#304763</color>
+  <color name="colorPrimaryDark">#273B53</color>
+  <color name="colorAccent">#F6836E</color>
+  <color name="textPrimary">#6B6B6B</color>
+  <color name="textSecondary">#7363A0</color>
+
+  <color name="seekbar_track_background">#0C000000</color>
+  <color name="seekbar_track_progress">#92616C</color>
+
+  <color name="white">#FFFFFF</color>
+  <color name="transparent">#00FFFFFF</color>
 </resources>
