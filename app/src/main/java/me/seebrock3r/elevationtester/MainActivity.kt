@@ -48,10 +48,7 @@ class MainActivity : AppCompatActivity() {
     private fun collapsePanel() {
         TransitionManager.beginDelayedTransition(rootContainer)
         ConstraintSet().apply {
-            clone(rootContainer)
-
-            connect(R.id.panelHeader, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
-            clear(R.id.panelBackground, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+            clone(this@MainActivity, R.layout.activity_main_collapsed)
         }.applyTo(rootContainer)
         expandCollapseImage.setImageState(intArrayOf(android.R.attr.state_checked), true)
     }
@@ -59,9 +56,7 @@ class MainActivity : AppCompatActivity() {
     private fun expandPanel() {
         TransitionManager.beginDelayedTransition(rootContainer)
         ConstraintSet().apply {
-            clone(rootContainer)
-            clear(R.id.panelHeader, ConstraintSet.TOP)
-            connect(R.id.panelHeader, ConstraintSet.BOTTOM, R.id.elevationValue, ConstraintSet.TOP)
+            clone(this@MainActivity, R.layout.activity_main_expanded)
         }.applyTo(rootContainer)
         expandCollapseImage.setImageState(intArrayOf(android.R.attr.state_checked), true)
     }

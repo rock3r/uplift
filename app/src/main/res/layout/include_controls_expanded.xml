@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:background="@color/white"
-  tools:showIn="@layout/activity_main_collapsed">
+  tools:showIn="@layout/activity_main_expanded">
 
   <TextView
     android:id="@+id/elevationLabel"
@@ -22,12 +22,12 @@
     android:id="@+id/elevationValue"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/seekbar_margin_bottom"
+    android:layout_marginBottom="@dimen/value_label_margin_bottom"
     android:elevation="101dp"
     android:text="@string/elevation_value"
     android:textAppearance="@style/TextAppearance.Uplift.SeekBarValue"
-    app:layout_constraintTop_toBottomOf="@+id/panelHeader"
     app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
+    app:layout_constraintBottom_toTopOf="@+id/elevationBar"
     tools:text="10dp" />
 
   <SeekBar
@@ -35,12 +35,12 @@
     style="@style/Widget.Uplift.SeekBar"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="@dimen/seekbar_height"
-    android:layout_marginTop="@dimen/value_label_margin_bottom"
+    android:layout_marginBottom="@dimen/seekbar_margin_bottom"
     android:elevation="101dp"
     android:max="100"
     app:layout_constraintStart_toStartOf="@+id/start_content_margin"
-    app:layout_constraintTop_toBottomOf="@+id/elevationValue"
     app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
+    app:layout_constraintBottom_toTopOf="@+id/xScaleValue"
     tools:progress="10" />
 
   <TextView
@@ -58,12 +58,12 @@
     android:id="@+id/xScaleValue"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/seekbar_margin_bottom"
+    android:layout_marginBottom="@dimen/value_label_margin_bottom"
     android:elevation="101dp"
     android:text="@string/x_scale_value"
     android:textAppearance="@style/TextAppearance.Uplift.SeekBarValue"
-    app:layout_constraintTop_toBottomOf="@+id/elevationBar"
     app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
+    app:layout_constraintBottom_toTopOf="@+id/xScaleBar"
     tools:text="100%" />
 
   <SeekBar
@@ -71,35 +71,34 @@
     style="@style/Widget.Uplift.SeekBar"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="@dimen/seekbar_height"
-    android:layout_marginTop="@dimen/value_label_margin_bottom"
+    android:layout_marginBottom="@dimen/seekbar_margin_bottom"
     android:elevation="101dp"
     android:max="200"
     app:layout_constraintStart_toStartOf="@+id/start_content_margin"
-    app:layout_constraintTop_toBottomOf="@+id/xScaleValue"
     app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
+    app:layout_constraintBottom_toTopOf="@+id/yScaleValue"
     tools:progress="100" />
 
   <TextView
     android:id="@+id/yScaleLabel"
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/match_constraint"
-    android:elevation="101dp"
+    android:layout_height="0dp"
     android:text="@string/y_scale_label"
     android:textAppearance="@style/TextAppearance.Uplift.SeekBarLabel"
-    app:layout_constraintStart_toStartOf="@+id/start_content_margin"
     app:layout_constraintTop_toTopOf="@+id/yScaleValue"
-    app:layout_constraintBottom_toBottomOf="@+id/yScaleValue" />
+    app:layout_constraintBottom_toBottomOf="@+id/yScaleValue"
+    app:layout_constraintStart_toStartOf="@+id/start_content_margin" />
 
   <TextView
     android:id="@+id/yScaleValue"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/seekbar_margin_bottom"
+    android:layout_marginBottom="@dimen/value_label_margin_bottom"
     android:elevation="101dp"
     android:text="@string/y_scale_value"
     android:textAppearance="@style/TextAppearance.Uplift.SeekBarValue"
-    app:layout_constraintTop_toBottomOf="@+id/xScaleBar"
     app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
+    app:layout_constraintBottom_toTopOf="@+id/yScaleBar"
     tools:text="100%" />
 
   <SeekBar
@@ -107,13 +106,13 @@
     style="@style/Widget.Uplift.SeekBar"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="@dimen/seekbar_height"
-    android:layout_marginTop="@dimen/value_label_margin_bottom"
+    android:layout_marginBottom="@dimen/seekbar_margin_bottom"
     android:elevation="101dp"
     android:max="200"
     app:layout_constraintStart_toStartOf="@+id/start_content_margin"
-    app:layout_constraintTop_toBottomOf="@+id/yScaleValue"
     app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
-    tools:progress="100" />
+    app:layout_constraintBottom_toTopOf="@+id/yShiftValue"
+    android:progress="100" />
 
   <TextView
     android:id="@+id/yShiftLabel"
@@ -122,20 +121,20 @@
     android:elevation="101dp"
     android:text="@string/y_shift_label"
     android:textAppearance="@style/TextAppearance.Uplift.SeekBarLabel"
-    app:layout_constraintStart_toStartOf="@+id/start_content_margin"
     app:layout_constraintTop_toTopOf="@+id/yShiftValue"
-    app:layout_constraintBottom_toBottomOf="@+id/yShiftValue" />
+    app:layout_constraintBottom_toBottomOf="@+id/yShiftValue"
+    app:layout_constraintStart_toStartOf="@+id/start_content_margin" />
 
   <TextView
     android:id="@+id/yShiftValue"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/seekbar_margin_bottom"
+    android:layout_marginBottom="@dimen/value_label_margin_bottom"
     android:elevation="101dp"
     android:text="@string/y_shift_value"
     android:textAppearance="@style/TextAppearance.Uplift.SeekBarValue"
-    app:layout_constraintTop_toBottomOf="@+id/yScaleBar"
     app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
+    app:layout_constraintBottom_toTopOf="@+id/yShiftBar"
     tools:text="0dp" />
 
   <SeekBar
@@ -148,8 +147,8 @@
     android:elevation="101dp"
     android:max="200"
     app:layout_constraintStart_toStartOf="@+id/start_content_margin"
-    app:layout_constraintTop_toBottomOf="@id/yShiftValue"
     app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
-    tools:progress="100" />
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:progress="100" />
 
 </merge>

@@ -21,7 +21,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/panelHeader"
     app:layout_constraintHorizontal_bias="0.5" />
 
   <View
@@ -30,7 +30,6 @@
     android:layout_height="@dimen/match_constraint"
     android:background="@color/white"
     android:elevation="101dp"
-    android:foreground="?selectableItemBackground"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="@id/panelHeader"
     app:layout_constraintEnd_toEndOf="parent"
