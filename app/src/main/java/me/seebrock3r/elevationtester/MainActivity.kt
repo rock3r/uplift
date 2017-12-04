@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         ConstraintSet().apply {
             clone(this@MainActivity, R.layout.activity_main_collapsed)
         }.applyTo(rootContainer)
-        expandCollapseImage.setImageState(intArrayOf(android.R.attr.state_checked), true)
+        expandCollapseImage.isChecked = false
         button.text = getString(R.string.drag_up_and_down)
     }
 
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         ConstraintSet().apply {
             clone(this@MainActivity, R.layout.activity_main_expanded)
         }.applyTo(rootContainer)
-        expandCollapseImage.setImageState(intArrayOf(android.R.attr.state_checked), true)
+        expandCollapseImage.isChecked = true
         button.text = getString(R.string.use_controls_below)
     }
 

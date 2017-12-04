@@ -17,10 +17,11 @@
     app:layout_constraintEnd_toStartOf="@id/expandCollapseImage"
     app:layout_constraintBottom_toBottomOf="parent" />
 
-  <ImageView
+  <me.seebrock3r.elevationtester.CheckableImageView
     android:id="@+id/expandCollapseImage"
     android:layout_width="wrap_content"
     android:layout_height="@dimen/match_constraint"
+    android:checked="true"
     android:elevation="101dp"
     android:src="@drawable/selector_expand_collapse"
     android:tint="@color/textPrimary"
