@@ -1,49 +1,29 @@
 package me.seebrock3r.elevationtester
 
-import android.graphics.Outline
-import android.graphics.Rect
 import android.os.Bundle
-import android.support.annotation.FloatRange
+import android.support.constraint.ConstraintSet
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.view.ViewOutlineProvider
+import android.transition.TransitionManager
 import android.widget.SeekBar
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.include_controls.*
+import kotlinx.android.synthetic.main.activity_main_collapsed.*
+import kotlinx.android.synthetic.main.include_controls_collapsed.*
+import kotlinx.android.synthetic.main.include_header_collapsed.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val outlineProvider = OutlineProvider(scaleX = 1f, scaleY = 1f, yShift = 0)
+    private lateinit var outlineProvider: TweakableOutlineProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_collapsed)
 
+        outlineProvider = TweakableOutlineProvider(resources = resources, scaleX = 1f, scaleY = 1f, yShift = 0)
         button.outlineProvider = outlineProvider
 
-        xScaleBar.setOnSeekBarChangeListener(object : BetterSeekListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                setScaleX(progress)
-            }
-        })
-
-        yScaleBar.setOnSeekBarChangeListener(object : BetterSeekListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                setScaleY(progress)
-            }
-        })
-
-        yShiftBar.setOnSeekBarChangeListener(object : BetterSeekListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                setShiftY(progress)
-            }
-        })
-
-        elevationBar.setOnSeekBarChangeListener(object : BetterSeekListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                setElevation(progress)
-            }
-        })
+        setupPanelHeaderControls()
+        setupElevationControls()
+        setupScaleXYControls()
+        setupYShiftControls()
 
 //        yPositionBar.setOnSeekBarChangeListener(object : BetterSeekListener {
 //            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -52,22 +32,78 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        })
 
-        setScaleX(0)
-        xScaleValue.setOnClickListener { xScaleBar.progress = xScaleBar.max / 2 }
-        yScaleValue.text = getString(R.string.y_scale_value, 0)
-        yScaleBar.progress = yScaleBar.max / 2
-        xScaleBar.progress = xScaleBar.max / 2
 
-        yShiftValue.text = getString(R.string.y_shift_value, 0)
-        yShiftBar.progress = yShiftBar.max / 2
-
-        elevationValue.text = getString(R.string.elevation_value, 0)
 //        yPositionBar.progress = yPositionBar.max / 2
+    }
+
+    private var panelExpanded = false
+
+    private fun setupPanelHeaderControls() {
+        panelHeader.setOnClickListener {
+            if (panelExpanded) collapsePanel() else expandPanel()
+            panelExpanded = !panelExpanded
+        }
+    }
+
+    private fun collapsePanel() {
+        TransitionManager.beginDelayedTransition(rootContainer)
+        ConstraintSet().apply {
+            clone(rootContainer)
+
+            connect(R.id.panelHeader, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+            clear(R.id.panelBackground, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+        }.applyTo(rootContainer)
+        expandCollapseImage.setImageState(intArrayOf(android.R.attr.state_checked), true)
+    }
+
+    private fun expandPanel() {
+        TransitionManager.beginDelayedTransition(rootContainer)
+        ConstraintSet().apply {
+            clone(rootContainer)
+            clear(R.id.panelHeader, ConstraintSet.TOP)
+            connect(R.id.panelHeader, ConstraintSet.BOTTOM, R.id.elevationValue, ConstraintSet.TOP)
+        }.applyTo(rootContainer)
+        expandCollapseImage.setImageState(intArrayOf(android.R.attr.state_checked), true)
+    }
+
+    private fun setupElevationControls() {
+        elevationBar.setOnSeekBarChangeListener(
+                object : BetterSeekListener {
+                    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                        setElevation(progress)
+                    }
+                }
+        )
+        elevationValue.text = getString(R.string.elevation_value, 0)
     }
 
     private fun setElevation(progress: Int) {
         button.elevation = progress * resources.displayMetrics.density
         elevationValue.text = getString(R.string.elevation_value, progress)
+    }
+
+    private fun setupScaleXYControls() {
+        xScaleBar.setOnSeekBarChangeListener(
+                object : BetterSeekListener {
+                    override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                        setScaleX(progress)
+                    }
+                }
+        )
+
+        yScaleBar.setOnSeekBarChangeListener(
+                object : BetterSeekListener {
+                    override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                        setScaleY(progress)
+                    }
+                }
+        )
+
+        setScaleX(0)
+        xScaleValue.setOnClickListener { xScaleBar.progress = xScaleBar.max / 2 }
+        yScaleValue.text = getString(R.string.y_scale_value, 0)
+        yScaleBar.progress = yScaleBar.max / 2
+        xScaleBar.progress = xScaleBar.max / 2
     }
 
     private fun setScaleX(progress: Int) {
@@ -84,6 +120,18 @@ class MainActivity : AppCompatActivity() {
         yScaleValue.text = getString(R.string.y_scale_value, scale + 100)
     }
 
+    private fun setupYShiftControls() {
+        yShiftBar.setOnSeekBarChangeListener(
+                object : BetterSeekListener {
+                    override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                        setShiftY(progress)
+                    }
+                }
+        )
+        yShiftValue.text = getString(R.string.y_shift_value, 0)
+        yShiftBar.progress = yShiftBar.max / 2
+    }
+
     private fun setShiftY(progress: Int) {
         val shift = progress - yShiftBar.max / 2
         outlineProvider.yShift = shift
@@ -91,35 +139,5 @@ class MainActivity : AppCompatActivity() {
         yShiftValue.text = getString(R.string.y_shift_value, shift)
     }
 
-    inner class OutlineProvider(private val rect: Rect = Rect(), var scaleX: Float, var scaleY: Float, var yShift: Int) : ViewOutlineProvider() {
-
-        override fun getOutline(view: View?, outline: Outline?) {
-            view?.background?.copyBounds(rect)
-            rect.scale(scaleX, scaleY)
-            rect.offset(0, yShift)
-            outline?.setRoundRect(rect, resources.getDimensionPixelSize(R.dimen.control_corner_material).toFloat())
-        }
-    }
 }
 
-private fun Rect.scale(
-        @FloatRange(from = -1.0, to = 1.0) scaleX: Float,
-        @FloatRange(from = -1.0, to = 1.0) scaleY: Float
-) {
-    val newWidth = width() * scaleX
-    val newHeight = height() * scaleY
-    val deltaX = (width() - newWidth) / 2
-    val deltaY = (height() - newHeight) / 2
-
-    set((left + deltaX).toInt(), (top + deltaY).toInt(), (right - deltaX).toInt(), (bottom - deltaY).toInt())
-}
-
-private interface BetterSeekListener : SeekBar.OnSeekBarChangeListener {
-    override fun onStartTrackingTouch(seekBar: SeekBar?) {
-        // Don't care
-    }
-
-    override fun onStopTrackingTouch(seekBar: SeekBar?) {
-        // Don't care
-    }
-}

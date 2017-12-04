@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/rootContainer"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".MainActivity">
+
+  <Button
+    android:id="@+id/button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/main_button_margin"
+    android:layout_marginStart="@dimen/main_button_margin"
+    android:background="@drawable/btn_colored_material"
+    android:textColor="?android:textColorPrimaryInverse"
+    android:padding="@dimen/main_button_padding"
+    android:text="@string/drag_up_and_down"
+    android:clickable="false"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintHorizontal_bias="0.5" />
+
+  <View
+    android:id="@+id/panelBackground"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="@dimen/match_constraint"
+    android:background="@color/white"
+    android:elevation="101dp"
+    android:foreground="?selectableItemBackground"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/panelHeader"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent" />
+
+  <include layout="@layout/include_header_expanded" />
+
+  <include layout="@layout/include_controls_expanded" />
+
+  <android.support.constraint.Guideline
+    android:id="@+id/start_content_margin"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_begin="@dimen/panel_content_margin" />
+
+  <android.support.constraint.Guideline
+    android:id="@+id/end_content_margin"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_end="@dimen/panel_content_margin" />
+
+</android.support.constraint.ConstraintLayout>

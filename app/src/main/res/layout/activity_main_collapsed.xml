@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/rootContainer"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context=".MainActivity">
@@ -33,11 +34,11 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="@id/panelHeader"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="@id/yShiftBar" />
+    app:layout_constraintBottom_toBottomOf="parent" />
 
-  <include layout="@layout/include_header" />
+  <include layout="@layout/include_header_collapsed" />
 
-  <include layout="@layout/include_controls" />
+  <include layout="@layout/include_controls_collapsed" />
 
   <android.support.constraint.Guideline
     android:id="@+id/start_content_margin"
