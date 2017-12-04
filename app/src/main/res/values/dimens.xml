@@ -19,5 +19,6 @@
   <dimen name="panel_header_text">18sp</dimen>
   <dimen name="header_vertical_padding">16dp</dimen>
   <dimen name="panel_content_margin">24dp</dimen>
+  <dimen name="button_vertical_margin">16dp</dimen>
 
 </resources>

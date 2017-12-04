@@ -1,17 +1,22 @@
 package me.seebrock3r.elevationtester
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.v7.app.AppCompatActivity
 import android.transition.TransitionManager
+import android.view.MotionEvent
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_main_collapsed.*
 import kotlinx.android.synthetic.main.include_controls_collapsed.*
 import kotlinx.android.synthetic.main.include_header_collapsed.*
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var outlineProvider: TweakableOutlineProvider
+    private var buttonVerticalMarginPixel = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,15 +30,7 @@ class MainActivity : AppCompatActivity() {
         setupScaleXYControls()
         setupYShiftControls()
 
-//        yPositionBar.setOnSeekBarChangeListener(object : BetterSeekListener {
-//            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-//                val shift = progress - seekBar.max / 2
-//                button.translationY = shift * resources.displayMetrics.density
-//            }
-//        })
-
-
-//        yPositionBar.progress = yPositionBar.max / 2
+        setupDragYToMove()
     }
 
     private var panelExpanded = false
@@ -45,8 +42,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun collapsePanel() {
-        TransitionManager.beginDelayedTransition(rootContainer)
+    private fun collapsePanel(animate: Boolean = true) {
+        if (animate) {
+            TransitionManager.beginDelayedTransition(rootContainer)
+        }
+        
         ConstraintSet().apply {
             clone(this@MainActivity, R.layout.activity_main_collapsed)
         }.applyTo(rootContainer)
@@ -134,6 +134,40 @@ class MainActivity : AppCompatActivity() {
         outlineProvider.yShift = shift
         button.invalidateOutline()
         yShiftValue.text = getString(R.string.y_shift_value, shift)
+    }
+
+    private fun setupDragYToMove() {
+        buttonVerticalMarginPixel = resources.getDimensionPixelSize(R.dimen.button_vertical_margin)
+
+        rootContainer.setOnTouchListener { _, motionEvent ->
+            when (motionEvent.actionMasked) {
+                MotionEvent.ACTION_DOWN -> handleActionDown(motionEvent)
+                MotionEvent.ACTION_MOVE -> handleDrag(motionEvent)
+                else -> false
+            }
+        }
+    }
+
+    private fun handleActionDown(motionEvent: MotionEvent): Boolean {
+        if (panelExpanded) {
+            return false    // Only draggable when the panel is collapsed
+        }
+
+        val hitRect = Rect()
+        button.getHitRect(hitRect)
+        return hitRect.contains(motionEvent.getX(0).roundToInt(), motionEvent.getY(0).roundToInt())
+    }
+
+    private fun handleDrag(motionEvent: MotionEvent): Boolean {
+        val availableHeight = panelHeader.y
+        val clampedEventY = motionEvent.getY(0)
+            .roundToInt()
+            .coerceIn(buttonVerticalMarginPixel, availableHeight.toInt() - buttonVerticalMarginPixel)
+
+        val layoutParams = button.layoutParams as ConstraintLayout.LayoutParams
+        layoutParams.verticalBias = (clampedEventY - button.height / 2) / availableHeight
+        button.layoutParams = layoutParams
+        return true
     }
 
 }
