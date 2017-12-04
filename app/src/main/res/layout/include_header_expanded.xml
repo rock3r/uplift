@@ -14,8 +14,10 @@
     android:text="@string/tweak_shadow"
     android:textAppearance="@style/TextAppearance.Uplift.PanelHeader"
     app:layout_constraintStart_toStartOf="@id/start_content_margin"
+    app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toStartOf="@id/expandCollapseImage"
-    app:layout_constraintBottom_toTopOf="@id/elevationLabel" />
+    app:layout_constraintBottom_toTopOf="@id/elevationLabel"
+    app:layout_constraintVertical_bias="1" />
 
   <ImageView
     android:id="@+id/expandCollapseImage"

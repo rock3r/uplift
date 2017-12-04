@@ -12,6 +12,7 @@
   <string name="y_shift_value">%ddp</string>
 
   <string name="drag_up_and_down">Drag up and down</string>
+  <string name="use_controls_below">Use controls below</string>
   <string name="tweak_shadow">TWEAK SHADOW</string>
 
 </resources>

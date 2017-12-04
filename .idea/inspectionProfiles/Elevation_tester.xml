@@ -193,7 +193,7 @@
     <inspection_tool class="PointlessIndexOfComparison" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="PointlessNullCheck" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="PrivatePropertyName" enabled="true" level="WEAK WARNING" enabled_by_default="true">
-      <option name="namePattern" value="(?!m[A-Z])[a-z][A-Za-z\d]*" />
+      <option name="namePattern" value="(?!m[A-Z])_?[a-z][A-Za-z\d]*" />
     </inspection_tool>
     <inspection_tool class="PropertyName" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="namePattern" value="(?!m[A-Z])[a-z][A-Za-z\d]*" />
