@@ -6,6 +6,7 @@
     <item name="colorAccent">@color/colorAccent</item>
     <item name="android:textColorPrimary">@color/textPrimary</item>
     <item name="android:textColorSecondary">@color/textSecondary</item>
+    <item name="android:windowBackground">@color/windowBackground</item>
   </style>
 
   <style name="None" />
@@ -15,6 +16,12 @@
   <style name="Widget.Uplift.SeekBar" parent="Widget.AppCompat.SeekBar">
     <item name="android:thumb">@drawable/seekbar_thumb</item>
     <item name="android:progressDrawable">@drawable/seekbar_track</item>
+  </style>
+
+  <style name="TextAppearance.Uplift.PanelHeader" parent="None">
+    <item name="android:textSize">@dimen/panel_header_text</item>
+    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:fontFamily">sans-serif-medium</item>
   </style>
 
   <style name="TextAppearance.Uplift.SeekBarLabel" parent="None">
@@ -28,5 +35,4 @@
     <item name="android:textColor">?android:textColorSecondary</item>
     <item name="android:fontFamily">sans-serif-medium</item>
   </style>
-
 </resources>

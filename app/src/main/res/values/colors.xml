@@ -5,6 +5,7 @@
   <color name="colorAccent">#F6836E</color>
   <color name="textPrimary">#6B6B6B</color>
   <color name="textSecondary">#7363A0</color>
+  <color name="windowBackground">#FAFAFA</color>
 
   <color name="seekbar_track_background">#0C000000</color>
   <color name="seekbar_track_progress">#92616C</color>

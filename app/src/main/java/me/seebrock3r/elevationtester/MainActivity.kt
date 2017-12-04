@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.include_controls.*
 
 class MainActivity : AppCompatActivity() {
 

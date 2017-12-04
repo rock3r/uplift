@@ -4,174 +4,53 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="me.seebrock3r.elevationtester.MainActivity">
-
-  <TextView
-    android:id="@+id/elevationLabel"
-    android:layout_width="wrap_content"
-    android:layout_height="0dp"
-    android:text="@string/elevation_label"
-    android:textAppearance="@style/TextAppearance.Uplift.SeekBarLabel"
-    app:layout_constraintTop_toTopOf="@+id/elevationValue"
-    app:layout_constraintBottom_toBottomOf="@+id/elevationValue"
-    app:layout_constraintStart_toStartOf="@+id/start_content_margin" />
-
-  <TextView
-    android:id="@+id/elevationValue"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:text="@string/elevation_value"
-    android:textAppearance="@style/TextAppearance.Uplift.SeekBarValue"
-    app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
-    app:layout_constraintBottom_toTopOf="@+id/elevationBar"
-    tools:text="0dp" />
-
-  <SeekBar
-    android:id="@+id/elevationBar"
-    style="@style/Widget.Uplift.SeekBar"
-    android:layout_width="0dp"
-    android:layout_height="24dp"
-    android:layout_marginBottom="24dp"
-    android:max="100"
-    app:layout_constraintStart_toStartOf="@+id/start_content_margin"
-    app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
-    app:layout_constraintBottom_toTopOf="@+id/xScaleValue" />
-
-  <TextView
-    android:id="@+id/xScaleLabel"
-    android:layout_width="wrap_content"
-    android:layout_height="0dp"
-    android:text="@string/x_scale_label"
-    android:textAppearance="@style/TextAppearance.Uplift.SeekBarLabel"
-    app:layout_constraintTop_toTopOf="@+id/xScaleValue"
-    app:layout_constraintBottom_toBottomOf="@+id/xScaleValue"
-    app:layout_constraintStart_toStartOf="@+id/start_content_margin" />
-
-  <TextView
-    android:id="@+id/xScaleValue"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:text="@string/x_scale_value"
-    android:textAppearance="@style/TextAppearance.Uplift.SeekBarValue"
-    app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
-    app:layout_constraintBottom_toTopOf="@+id/xScaleBar"
-    tools:text="0dp" />
-
-  <SeekBar
-    android:id="@+id/xScaleBar"
-    style="@style/Widget.Uplift.SeekBar"
-    android:layout_width="0dp"
-    android:layout_height="24dp"
-    android:layout_marginBottom="24dp"
-    android:max="200"
-    app:layout_constraintStart_toStartOf="@+id/start_content_margin"
-    app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
-    app:layout_constraintBottom_toTopOf="@+id/yScaleValue" />
-
-  <TextView
-    android:id="@+id/yScaleLabel"
-    android:layout_width="wrap_content"
-    android:layout_height="0dp"
-    android:text="@string/y_scale_label"
-    android:textAppearance="@style/TextAppearance.Uplift.SeekBarLabel"
-    app:layout_constraintTop_toTopOf="@+id/yScaleValue"
-    app:layout_constraintBottom_toBottomOf="@+id/yScaleValue"
-    app:layout_constraintStart_toStartOf="@+id/start_content_margin" />
-
-  <TextView
-    android:id="@+id/yScaleValue"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:text="@string/y_scale_value"
-    android:textAppearance="@style/TextAppearance.Uplift.SeekBarValue"
-    app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
-    app:layout_constraintBottom_toTopOf="@+id/yScaleBar"
-    tools:text="0dp" />
-
-  <SeekBar
-    android:id="@+id/yScaleBar"
-    style="@style/Widget.Uplift.SeekBar"
-    android:layout_width="0dp"
-    android:layout_height="24dp"
-    android:layout_marginBottom="24dp"
-    android:max="200"
-    app:layout_constraintStart_toStartOf="@+id/start_content_margin"
-    app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
-    app:layout_constraintBottom_toTopOf="@+id/yShiftValue" />
-
-  <TextView
-    android:id="@+id/yShiftLabel"
-    android:layout_width="wrap_content"
-    android:layout_height="0dp"
-    android:text="@string/y_shift_label"
-    android:textAppearance="@style/TextAppearance.Uplift.SeekBarLabel"
-    app:layout_constraintTop_toTopOf="@+id/yShiftValue"
-    app:layout_constraintBottom_toBottomOf="@+id/yShiftValue"
-    app:layout_constraintStart_toStartOf="@+id/start_content_margin" />
-
-  <TextView
-    android:id="@+id/yShiftValue"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:text="@string/y_shift_value"
-    android:textAppearance="@style/TextAppearance.Uplift.SeekBarValue"
-    app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
-    app:layout_constraintBottom_toTopOf="@+id/yShiftBar"
-    tools:text="0dp" />
-
-  <SeekBar
-    android:id="@+id/yShiftBar"
-    style="@style/Widget.Uplift.SeekBar"
-    android:layout_width="0dp"
-    android:layout_height="24dp"
-    android:layout_marginBottom="24dp"
-    android:max="200"
-    app:layout_constraintStart_toStartOf="@+id/start_content_margin"
-    app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
-    app:layout_constraintBottom_toBottomOf="parent" />
-
-  <android.support.constraint.Guideline
-    android:id="@+id/guideline"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:layout_constraintGuide_begin="116dp" />
+  tools:context=".MainActivity">
 
   <Button
     android:id="@+id/button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
+    android:layout_marginEnd="@dimen/main_button_margin"
+    android:layout_marginStart="@dimen/main_button_margin"
     android:background="@drawable/btn_colored_material"
-    android:textColor="#fff"
-    android:padding="32dp"
-    android:text="@string/test_test_test"
+    android:textColor="?android:textColorPrimaryInverse"
+    android:padding="@dimen/main_button_padding"
+    android:text="@string/drag_up_and_down"
     android:clickable="false"
-    android:focusable="false"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintHorizontal_bias="0.5" />
+
+  <View
+    android:id="@+id/panelBackground"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="@dimen/match_constraint"
+    android:background="@color/white"
+    android:elevation="101dp"
+    android:foreground="?selectableItemBackground"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/panelHeader"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="@id/yShiftBar" />
+
+  <include layout="@layout/include_header" />
+
+  <include layout="@layout/include_controls" />
 
   <android.support.constraint.Guideline
     android:id="@+id/start_content_margin"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:layout_constraintGuide_begin="24dp" />
+    app:layout_constraintGuide_begin="@dimen/panel_content_margin" />
 
   <android.support.constraint.Guideline
     android:id="@+id/end_content_margin"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:layout_constraintGuide_end="24dp" />
+    app:layout_constraintGuide_end="@dimen/panel_content_margin" />
 
 </android.support.constraint.ConstraintLayout>

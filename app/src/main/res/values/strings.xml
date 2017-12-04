@@ -11,6 +11,7 @@
   <string name="y_shift_label">Shift Y</string>
   <string name="y_shift_value">%ddp</string>
 
-  <string name="test_test_test">Drag up and down</string>
+  <string name="drag_up_and_down">Drag up and down</string>
+  <string name="tweak_shadow">TWEAK SHADOW</string>
 
 </resources>
