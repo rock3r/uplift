@@ -7,6 +7,17 @@
   android:layout_height="match_parent"
   tools:context=".MainActivity">
 
+  <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    style="@style/Uplift.ActionBar"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
   <Button
     android:id="@+id/button"
     android:layout_width="wrap_content"
@@ -19,7 +30,7 @@
     android:text="@string/drag_up_and_down"
     android:clickable="false"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/toolbar"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toTopOf="@id/panelHeader"
     app:layout_constraintHorizontal_bias="0.5" />

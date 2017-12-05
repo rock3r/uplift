@@ -1,6 +1,6 @@
 <resources>
 
-  <style name="Theme.Uplift" parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="Theme.Uplift" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
@@ -10,6 +10,13 @@
   </style>
 
   <style name="None" />
+
+  <style name="Uplift.ActionBar" parent="Widget.AppCompat.Toolbar">
+    <item name="android:background">?colorPrimary</item>
+    <item name="logo">@drawable/ic_uplift</item>
+    <item name="title">@string/app_name</item>
+    <item name="titleMarginStart">@dimen/appbar_title_margin_start</item>
+  </style>
 
   <style name="Widget.Uplift" parent="None" />
 
@@ -35,4 +42,5 @@
     <item name="android:textColor">?android:textColorSecondary</item>
     <item name="android:fontFamily">sans-serif-medium</item>
   </style>
+
 </resources>
