@@ -1,7 +1,9 @@
 package me.seebrock3r.elevationtester
 
+import android.content.res.Resources
 import android.graphics.Rect
 import android.os.Bundle
+import android.support.annotation.DimenRes
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.v7.app.AppCompatActivity
@@ -23,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_collapsed)
 
         outlineProvider = TweakableOutlineProvider(resources = resources, scaleX = 1f, scaleY = 1f, yShift = 0)
-        button.outlineProvider = outlineProvider
+        main_button.outlineProvider = outlineProvider
 
         setupPanelHeaderControls()
         setupElevationControls()
@@ -31,6 +33,12 @@ class MainActivity : AppCompatActivity() {
         setupYShiftControls()
 
         setupDragYToMove()
+
+        collapsePanel(animate = false)
+
+        val initialButtonElevationDp = resources.getDimensionDpSize(R.dimen.main_button_initial_elevation).roundToInt()
+//        setElevationDp(initialButtonElevationDp)
+        elevationBar.progress = initialButtonElevationDp
     }
 
     private var panelExpanded = false
@@ -46,12 +54,12 @@ class MainActivity : AppCompatActivity() {
         if (animate) {
             TransitionManager.beginDelayedTransition(rootContainer)
         }
-        
+
         ConstraintSet().apply {
             clone(this@MainActivity, R.layout.activity_main_collapsed)
         }.applyTo(rootContainer)
         expandCollapseImage.isChecked = false
-        button.text = getString(R.string.drag_up_and_down)
+        main_button.text = getString(R.string.drag_up_and_down)
     }
 
     private fun expandPanel() {
@@ -60,23 +68,24 @@ class MainActivity : AppCompatActivity() {
             clone(this@MainActivity, R.layout.activity_main_expanded)
         }.applyTo(rootContainer)
         expandCollapseImage.isChecked = true
-        button.text = getString(R.string.use_controls_below)
+        main_button.text = getString(R.string.use_controls_below)
     }
 
     private fun setupElevationControls() {
         elevationBar.setOnSeekBarChangeListener(
                 object : BetterSeekListener {
                     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                        setElevation(progress)
+                        setElevationDp(progress)
                     }
                 }
         )
         elevationValue.text = getString(R.string.elevation_value, 0)
     }
 
-    private fun setElevation(progress: Int) {
-        button.elevation = progress * resources.displayMetrics.density
-        elevationValue.text = getString(R.string.elevation_value, progress)
+    private fun setElevationDp(elevationDp: Int) {
+        val elevationPixel = elevationDp * resources.displayMetrics.density
+        main_button.elevation = elevationPixel
+        elevationValue.text = getString(R.string.elevation_value, elevationDp)
     }
 
     private fun setupScaleXYControls() {
@@ -103,17 +112,17 @@ class MainActivity : AppCompatActivity() {
         xScaleBar.progress = xScaleBar.max / 2
     }
 
-    private fun setScaleX(progress: Int) {
-        val scale = progress - xScaleBar.max / 2
+    private fun setScaleX(scaleXPercent: Int) {
+        val scale = scaleXPercent - xScaleBar.max / 2
         outlineProvider.scaleX = 1 + scale / 100f
-        button.invalidateOutline()
+        main_button.invalidateOutline()
         xScaleValue.text = getString(R.string.x_scale_value, scale + 100)
     }
 
-    private fun setScaleY(progress: Int) {
-        val scale = progress - yScaleBar.max / 2
+    private fun setScaleY(scaleYPercent: Int) {
+        val scale = scaleYPercent - yScaleBar.max / 2
         outlineProvider.scaleY = 1 + scale / 100f
-        button.invalidateOutline()
+        main_button.invalidateOutline()
         yScaleValue.text = getString(R.string.y_scale_value, scale + 100)
     }
 
@@ -129,11 +138,12 @@ class MainActivity : AppCompatActivity() {
         yShiftBar.progress = yShiftBar.max / 2
     }
 
-    private fun setShiftY(progress: Int) {
-        val shift = progress - yShiftBar.max / 2
-        outlineProvider.yShift = shift
-        button.invalidateOutline()
-        yShiftValue.text = getString(R.string.y_shift_value, shift)
+    private fun setShiftY(shiftYDp: Int) {
+        val adjustedShiftYDp = shiftYDp - yShiftBar.max / 2
+        val adjustedShiftYPixel = adjustedShiftYDp * resources.displayMetrics.density
+        outlineProvider.yShift = adjustedShiftYPixel.roundToInt()
+        main_button.invalidateOutline()
+        yShiftValue.text = getString(R.string.y_shift_value, adjustedShiftYDp)
     }
 
     private fun setupDragYToMove() {
@@ -154,7 +164,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val hitRect = Rect()
-        button.getHitRect(hitRect)
+        main_button.getHitRect(hitRect)
         return hitRect.contains(motionEvent.getX(0).roundToInt(), motionEvent.getY(0).roundToInt())
     }
 
@@ -164,15 +174,16 @@ class MainActivity : AppCompatActivity() {
             .roundToInt()
             .coerceIn(buttonVerticalMarginPixel, availableHeight.toInt() - buttonVerticalMarginPixel)
 
-        val layoutParams = button.layoutParams as ConstraintLayout.LayoutParams
+        val layoutParams = main_button.layoutParams as ConstraintLayout.LayoutParams
         val minimumBias = buttonVerticalMarginPixel / availableHeight
-        val maximumBias = (availableHeight - button.height) / availableHeight
+        val maximumBias = (availableHeight - main_button.height) / availableHeight
 
-        layoutParams.verticalBias = ((clampedEventY - button.height / 2) / availableHeight)
+        layoutParams.verticalBias = ((clampedEventY - main_button.height / 2) / availableHeight)
             .coerceIn(minimumBias, maximumBias)
-        button.layoutParams = layoutParams
+        main_button.layoutParams = layoutParams
         return true
     }
 
 }
 
+private fun Resources.getDimensionDpSize(@DimenRes dimensionResId: Int): Float = getDimensionPixelSize(dimensionResId) / displayMetrics.density

@@ -14,6 +14,7 @@
 
   <style name="Uplift.ActionBar" parent="Widget.AppCompat.Toolbar">
     <item name="android:background">?colorPrimary</item>
+    <item name="android:elevation">@dimen/appbar_elevation</item>
     <item name="logo">@drawable/ic_uplift</item>
     <item name="title">@string/app_name</item>
     <item name="titleMarginStart">@dimen/appbar_title_margin_start</item>
