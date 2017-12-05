@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <integer name="max_elevation_progress">100</integer>
+  <integer name="max_scale_x_progress">200</integer>
+  <integer name="max_scale_y_progress">200</integer>
+  <integer name="max_shift_y_progress">100</integer>
+
+</resources>
