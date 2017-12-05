@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupDragYToMove() {
-        buttonVerticalMarginPixel = resources.getDimensionPixelSize(R.dimen.button_vertical_margin)
+        buttonVerticalMarginPixel = resources.getDimensionPixelSize(R.dimen.main_button_vertical_margin)
 
         rootContainer.setOnTouchListener { _, motionEvent ->
             when (motionEvent.actionMasked) {

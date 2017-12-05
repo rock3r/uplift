@@ -30,7 +30,7 @@
     android:layout_width="@dimen/match_constraint"
     android:layout_height="@dimen/match_constraint"
     android:background="@color/white"
-    android:elevation="101dp"
+    android:elevation="@dimen/panel_elevation"
     android:foreground="?selectableItemBackground"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="@id/panelHeader"
