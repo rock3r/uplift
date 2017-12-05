@@ -165,7 +165,11 @@ class MainActivity : AppCompatActivity() {
             .coerceIn(buttonVerticalMarginPixel, availableHeight.toInt() - buttonVerticalMarginPixel)
 
         val layoutParams = button.layoutParams as ConstraintLayout.LayoutParams
-        layoutParams.verticalBias = (clampedEventY - button.height / 2) / availableHeight
+        val minimumBias = buttonVerticalMarginPixel / availableHeight
+        val maximumBias = (availableHeight - button.height) / availableHeight
+
+        layoutParams.verticalBias = ((clampedEventY - button.height / 2) / availableHeight)
+            .coerceIn(minimumBias, maximumBias)
         button.layoutParams = layoutParams
         return true
     }
