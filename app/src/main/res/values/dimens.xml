@@ -14,6 +14,7 @@
   <dimen name="seekbar_label_text">@dimen/text_normal</dimen>
 
   <dimen name="main_button_padding">32dp</dimen>
+  <dimen name="main_button_text">16sp</dimen>
   <dimen name="main_button_margin">8dp</dimen>
   <dimen name="main_button_vertical_margin">16dp</dimen>
 

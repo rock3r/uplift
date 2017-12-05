@@ -25,15 +25,14 @@
     android:layout_marginEnd="@dimen/main_button_margin"
     android:layout_marginStart="@dimen/main_button_margin"
     android:background="@drawable/btn_colored_material"
-    android:textColor="?android:textColorPrimaryInverse"
-    android:padding="@dimen/main_button_padding"
-    android:text="@string/drag_up_and_down"
     android:clickable="false"
-    android:focusable="false"
+    android:padding="@dimen/main_button_padding"
+    android:text="@string/use_controls_below"
+    android:textAppearance="@style/TextAppearance.Uplift.MainButton"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/toolbar"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/panelHeader"
     app:layout_constraintHorizontal_bias="0.5" />
 
   <View
