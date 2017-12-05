@@ -10,7 +10,7 @@
     android:supportsRtl="false">
 
     <activity android:name=".MainActivity"
-      android:screenOrientation="portrait">
+      android:screenOrientation="nosensor">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
