@@ -108,10 +108,10 @@
     android:layout_marginBottom="@dimen/seekbar_margin_bottom"
     android:elevation="@dimen/panel_elevation"
     android:max="@integer/max_scale_y_progress"
+    android:progress="100"
     app:layout_constraintStart_toStartOf="@+id/start_content_margin"
     app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
-    app:layout_constraintBottom_toTopOf="@+id/yShiftValue"
-    android:progress="100" />
+    app:layout_constraintBottom_toTopOf="@+id/yShiftValue" />
 
   <TextView
     android:id="@+id/yShiftLabel"
@@ -145,9 +145,9 @@
     android:layout_marginBottom="@dimen/seekbar_margin_bottom"
     android:elevation="@dimen/panel_elevation"
     android:max="@integer/max_shift_y_progress"
+    android:progress="100"
     app:layout_constraintStart_toStartOf="@+id/start_content_margin"
     app:layout_constraintEnd_toStartOf="@+id/end_content_margin"
-    app:layout_constraintBottom_toBottomOf="parent"
-    android:progress="100" />
+    app:layout_constraintBottom_toBottomOf="parent" />
 
 </merge>
