@@ -33,7 +33,6 @@
     android:id="@+id/panelHeader"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="@dimen/match_constraint"
-    android:layout_marginBottom="@dimen/panel_content_top_padding"
     android:background="?selectableItemBackground"
     android:clickable="true"
     android:elevation="@dimen/panel_elevation"

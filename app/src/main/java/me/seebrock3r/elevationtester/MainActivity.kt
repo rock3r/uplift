@@ -7,6 +7,7 @@ import android.transition.TransitionManager
 import android.view.MotionEvent
 import android.widget.SeekBar
 import androidx.annotation.DimenRes
+import androidx.annotation.Px
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -18,7 +19,11 @@ import kotlin.math.roundToInt
 class MainActivity : AppCompatActivity() {
 
     private lateinit var outlineProvider: TweakableOutlineProvider
+
+    @Px
     private var buttonVerticalMarginPixel = 0
+
+    private var panelExpanded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +44,6 @@ class MainActivity : AppCompatActivity() {
         val initialButtonElevationDp = resources.getDimensionDpSize(R.dimen.main_button_initial_elevation).roundToInt()
         elevationBar.progress = initialButtonElevationDp
     }
-
-    private var panelExpanded = false
 
     private fun setupPanelHeaderControls() {
         panelHeader.setOnClickListener {
