@@ -3,13 +3,13 @@ package me.seebrock3r.elevationtester
 import android.content.res.Resources
 import android.graphics.Rect
 import android.os.Bundle
-import android.support.annotation.DimenRes
-import android.support.constraint.ConstraintLayout
-import android.support.constraint.ConstraintSet
-import android.support.v7.app.AppCompatActivity
 import android.transition.TransitionManager
 import android.view.MotionEvent
 import android.widget.SeekBar
+import androidx.annotation.DimenRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import kotlinx.android.synthetic.main.activity_main_collapsed.*
 import kotlinx.android.synthetic.main.include_controls_collapsed.*
 import kotlinx.android.synthetic.main.include_header_collapsed.*
@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         collapsePanel(animate = false)
 
         val initialButtonElevationDp = resources.getDimensionDpSize(R.dimen.main_button_initial_elevation).roundToInt()
-//        setElevationDp(initialButtonElevationDp)
         elevationBar.progress = initialButtonElevationDp
     }
 
@@ -73,11 +72,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupElevationControls() {
         elevationBar.setOnSeekBarChangeListener(
-                object : BetterSeekListener {
-                    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                        setElevationDp(progress)
-                    }
+            object : BetterSeekListener {
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    setElevationDp(progress)
                 }
+            }
         )
         elevationValue.text = getString(R.string.elevation_value, 0)
     }
@@ -90,19 +89,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupScaleXYControls() {
         xScaleBar.setOnSeekBarChangeListener(
-                object : BetterSeekListener {
-                    override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                        setScaleX(progress)
-                    }
+            object : BetterSeekListener {
+                override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                    setScaleX(progress)
                 }
+            }
         )
 
         yScaleBar.setOnSeekBarChangeListener(
-                object : BetterSeekListener {
-                    override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                        setScaleY(progress)
-                    }
+            object : BetterSeekListener {
+                override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                    setScaleY(progress)
                 }
+            }
         )
 
         setScaleX(0)
@@ -128,11 +127,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupYShiftControls() {
         yShiftBar.setOnSeekBarChangeListener(
-                object : BetterSeekListener {
-                    override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                        setShiftY(progress)
-                    }
+            object : BetterSeekListener {
+                override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                    setShiftY(progress)
                 }
+            }
         )
         yShiftValue.text = getString(R.string.y_shift_value, 0)
         yShiftBar.progress = yShiftBar.max / 2
@@ -183,7 +182,6 @@ class MainActivity : AppCompatActivity() {
         main_button.layoutParams = layoutParams
         return true
     }
-
 }
 
 private fun Resources.getDimensionDpSize(@DimenRes dimensionResId: Int): Float = getDimensionPixelSize(dimensionResId) / displayMetrics.density

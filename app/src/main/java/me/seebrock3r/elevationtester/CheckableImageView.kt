@@ -57,5 +57,4 @@ internal class CheckableImageView(context: Context, attrs: AttributeSet) : Image
 
         private val CHECKED_STATE_SET = intArrayOf(android.R.attr.state_checked)
     }
-
 }

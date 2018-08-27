@@ -3,9 +3,9 @@ package me.seebrock3r.elevationtester
 import android.content.res.Resources
 import android.graphics.Outline
 import android.graphics.Rect
-import android.support.annotation.FloatRange
 import android.view.View
 import android.view.ViewOutlineProvider
+import androidx.annotation.FloatRange
 
 internal class TweakableOutlineProvider(val resources: Resources, var scaleX: Float, var scaleY: Float, var yShift: Int) : ViewOutlineProvider() {
 
@@ -20,8 +20,8 @@ internal class TweakableOutlineProvider(val resources: Resources, var scaleX: Fl
 }
 
 private fun Rect.scale(
-        @FloatRange(from = -1.0, to = 1.0) scaleX: Float,
-        @FloatRange(from = -1.0, to = 1.0) scaleY: Float
+    @FloatRange(from = -1.0, to = 1.0) scaleX: Float,
+    @FloatRange(from = -1.0, to = 1.0) scaleY: Float
 ) {
     val newWidth = width() * scaleX
     val newHeight = height() * scaleY

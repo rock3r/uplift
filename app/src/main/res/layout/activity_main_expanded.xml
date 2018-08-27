@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/rootContainer"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context=".MainActivity">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:id="@+id/rootContainer"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   tools:context=".MainActivity">
 
-  <android.support.v7.widget.Toolbar
+  <androidx.appcompat.widget.Toolbar
     android:id="@+id/toolbar"
     style="@style/Uplift.ActionBar"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -49,18 +49,18 @@
 
   <include layout="@layout/include_controls_expanded" />
 
-  <android.support.constraint.Guideline
+  <androidx.constraintlayout.widget.Guideline
     android:id="@+id/start_content_margin"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     app:layout_constraintGuide_begin="@dimen/panel_content_margin" />
 
-  <android.support.constraint.Guideline
+  <androidx.constraintlayout.widget.Guideline
     android:id="@+id/end_content_margin"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     app:layout_constraintGuide_end="@dimen/panel_content_margin" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
