@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <integer name="animation_duration_drag_start">100</integer>
+  <integer name="animation_duration_drag_end">200</integer>
+
+</resources>

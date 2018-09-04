@@ -153,21 +153,30 @@ class MainActivity : AppCompatActivity() {
 
         buttonContainer.setOnTouchListener { _, motionEvent ->
             when (motionEvent.actionMasked) {
-                MotionEvent.ACTION_DOWN -> handleActionDown(motionEvent)
+                MotionEvent.ACTION_DOWN -> handleDragStart(motionEvent)
                 MotionEvent.ACTION_MOVE -> handleDrag(motionEvent)
+                MotionEvent.ACTION_UP -> handleDragEnd()
                 else -> false
             }
         }
     }
 
-    private fun handleActionDown(motionEvent: MotionEvent): Boolean {
+    private fun handleDragStart(motionEvent: MotionEvent): Boolean {
         if (panelExpanded) {
             return false // Only draggable when the panel is collapsed
         }
 
         mainButton.getHitRect(hitRect)
         dragYOffset = (mainButton.y + mainButton.height / 2F) - motionEvent.y
-        return hitRect.contains(motionEvent.getX(0).roundToInt(), motionEvent.getY(0).roundToInt())
+        val dragOnButton = hitRect.contains(motionEvent.getX(0).roundToInt(), motionEvent.getY(0).roundToInt())
+
+        if (dragOnButton) {
+            mainButton.animate()
+                .scaleX(1.04F)
+                .scaleY(1.04F)
+                .duration = resources.getInteger(R.integer.animation_duration_drag_start).toLong()
+        }
+        return dragOnButton
     }
 
     private fun handleDrag(motionEvent: MotionEvent): Boolean {
@@ -180,6 +189,15 @@ class MainActivity : AppCompatActivity() {
 
         mainButton.layoutParams = (mainButton.layoutParams as ConstraintLayout.LayoutParams)
             .apply { verticalBias = newBias }
+
+        return true
+    }
+
+    private fun handleDragEnd(): Boolean {
+        mainButton.animate()
+            .scaleX(1F)
+            .scaleY(1F)
+            .duration = resources.getInteger(R.integer.animation_duration_drag_end).toLong()
 
         return true
     }
