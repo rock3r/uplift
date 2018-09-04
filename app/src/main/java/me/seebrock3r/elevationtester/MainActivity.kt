@@ -3,17 +3,18 @@ package me.seebrock3r.elevationtester
 import android.content.res.Resources
 import android.graphics.Rect
 import android.os.Bundle
-import android.transition.TransitionManager
+import android.util.Log
 import android.view.MotionEvent
 import android.widget.SeekBar
 import androidx.annotation.DimenRes
 import androidx.annotation.Px
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
+import androidx.transition.TransitionManager
 import kotlinx.android.synthetic.main.activity_main_collapsed.*
-import kotlinx.android.synthetic.main.include_controls_collapsed.*
-import kotlinx.android.synthetic.main.include_header_collapsed.*
+import kotlinx.android.synthetic.main.include_header.*
+import kotlinx.android.synthetic.main.include_panel_controls.*
 import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
@@ -23,14 +24,17 @@ class MainActivity : AppCompatActivity() {
     @Px
     private var buttonVerticalMarginPixel = 0
 
+    private val hitRect = Rect()
     private var panelExpanded = false
+
+    private var dragYOffset = 0F
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_collapsed)
 
         outlineProvider = TweakableOutlineProvider(resources = resources, scaleX = 1f, scaleY = 1f, yShift = 0)
-        main_button.outlineProvider = outlineProvider
+        mainButton.outlineProvider = outlineProvider
 
         setupPanelHeaderControls()
         setupElevationControls()
@@ -38,39 +42,35 @@ class MainActivity : AppCompatActivity() {
         setupYShiftControls()
 
         setupDragYToMove()
-
-        collapsePanel(animate = false)
+        panelCollapsed()
 
         val initialButtonElevationDp = resources.getDimensionDpSize(R.dimen.main_button_initial_elevation).roundToInt()
         elevationBar.progress = initialButtonElevationDp
     }
 
     private fun setupPanelHeaderControls() {
-        panelHeader.setOnClickListener {
-            if (panelExpanded) collapsePanel() else expandPanel()
-            panelExpanded = !panelExpanded
-        }
+        rootContainer.setTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionChange(view: MotionLayout, startState: Int, endState: Int, progress: Float) {
+                // No-op
+            }
+
+            override fun onTransitionCompleted(view: MotionLayout, state: Int) {
+                panelExpanded = state == R.layout.activity_main_expanded
+                Log.i("!!!!!!!", "Expanded: $panelExpanded")
+                TransitionManager.beginDelayedTransition(view)
+                if (panelExpanded) panelExpanded() else panelCollapsed()
+            }
+        })
     }
 
-    private fun collapsePanel(animate: Boolean = true) {
-        if (animate) {
-            TransitionManager.beginDelayedTransition(rootContainer)
-        }
-
-        ConstraintSet().apply {
-            clone(this@MainActivity, R.layout.activity_main_collapsed)
-        }.applyTo(rootContainer)
+    private fun panelCollapsed() {
         expandCollapseImage.isChecked = false
-        main_button.text = getString(R.string.drag_up_and_down)
+        mainButton.text = getString(R.string.drag_up_and_down)
     }
 
-    private fun expandPanel() {
-        TransitionManager.beginDelayedTransition(rootContainer)
-        ConstraintSet().apply {
-            clone(this@MainActivity, R.layout.activity_main_expanded)
-        }.applyTo(rootContainer)
+    private fun panelExpanded() {
         expandCollapseImage.isChecked = true
-        main_button.text = getString(R.string.use_controls_below)
+        mainButton.text = getString(R.string.use_controls_below)
     }
 
     private fun setupElevationControls() {
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setElevationDp(elevationDp: Int) {
         val elevationPixel = elevationDp * resources.displayMetrics.density
-        main_button.elevation = elevationPixel
+        mainButton.elevation = elevationPixel
         elevationValue.text = getString(R.string.elevation_value, elevationDp)
     }
 
@@ -117,14 +117,14 @@ class MainActivity : AppCompatActivity() {
     private fun setScaleX(scaleXPercent: Int) {
         val scale = scaleXPercent - xScaleBar.max / 2
         outlineProvider.scaleX = 1 + scale / 100f
-        main_button.invalidateOutline()
+        mainButton.invalidateOutline()
         xScaleValue.text = getString(R.string.x_scale_value, scale + 100)
     }
 
     private fun setScaleY(scaleYPercent: Int) {
         val scale = scaleYPercent - yScaleBar.max / 2
         outlineProvider.scaleY = 1 + scale / 100f
-        main_button.invalidateOutline()
+        mainButton.invalidateOutline()
         yScaleValue.text = getString(R.string.y_scale_value, scale + 100)
     }
 
@@ -144,14 +144,14 @@ class MainActivity : AppCompatActivity() {
         val adjustedShiftYDp = shiftYDp - yShiftBar.max / 2
         val adjustedShiftYPixel = adjustedShiftYDp * resources.displayMetrics.density
         outlineProvider.yShift = adjustedShiftYPixel.roundToInt()
-        main_button.invalidateOutline()
+        mainButton.invalidateOutline()
         yShiftValue.text = getString(R.string.y_shift_value, adjustedShiftYDp)
     }
 
     private fun setupDragYToMove() {
         buttonVerticalMarginPixel = resources.getDimensionPixelSize(R.dimen.main_button_vertical_margin)
 
-        rootContainer.setOnTouchListener { _, motionEvent ->
+        buttonContainer.setOnTouchListener { _, motionEvent ->
             when (motionEvent.actionMasked) {
                 MotionEvent.ACTION_DOWN -> handleActionDown(motionEvent)
                 MotionEvent.ACTION_MOVE -> handleDrag(motionEvent)
@@ -162,29 +162,28 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleActionDown(motionEvent: MotionEvent): Boolean {
         if (panelExpanded) {
-            return false    // Only draggable when the panel is collapsed
+            return false // Only draggable when the panel is collapsed
         }
 
-        val hitRect = Rect()
-        main_button.getHitRect(hitRect)
+        mainButton.getHitRect(hitRect)
+        dragYOffset = (mainButton.y + mainButton.height / 2F) - motionEvent.y
         return hitRect.contains(motionEvent.getX(0).roundToInt(), motionEvent.getY(0).roundToInt())
     }
 
     private fun handleDrag(motionEvent: MotionEvent): Boolean {
-        val availableHeight = panelHeader.y
-        val clampedEventY = motionEvent.getY(0)
-            .roundToInt()
-            .coerceIn(buttonVerticalMarginPixel, availableHeight.toInt() - buttonVerticalMarginPixel)
+        val minY = buttonContainer.paddingTop.toFloat() + mainButton.height / 2F
+        val maxY = buttonContainer.height - buttonContainer.paddingBottom - mainButton.height / 2F
+        val availableHeight = maxY - minY
 
-        val layoutParams = main_button.layoutParams as ConstraintLayout.LayoutParams
-        val minimumBias = buttonVerticalMarginPixel / availableHeight
-        val maximumBias = (availableHeight - main_button.height) / availableHeight
+        val coercedY = (motionEvent.y + dragYOffset).coerceIn(minY, maxY)
+        val newBias = (coercedY - minY) / availableHeight
 
-        layoutParams.verticalBias = ((clampedEventY - main_button.height / 2) / availableHeight)
-            .coerceIn(minimumBias, maximumBias)
-        main_button.layoutParams = layoutParams
+        mainButton.layoutParams = (mainButton.layoutParams as ConstraintLayout.LayoutParams)
+            .apply { verticalBias = newBias }
+
         return true
     }
 }
 
-private fun Resources.getDimensionDpSize(@DimenRes dimensionResId: Int): Float = getDimensionPixelSize(dimensionResId) / displayMetrics.density
+private fun Resources.getDimensionDpSize(@DimenRes dimensionResId: Int): Float =
+    getDimensionPixelSize(dimensionResId) / displayMetrics.density

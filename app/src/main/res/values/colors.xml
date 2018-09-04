@@ -9,6 +9,7 @@
   <color name="windowBackground">#FAFAFA</color>
 
   <color name="white">#FFFFFF</color>
+  <color name="white_50">#80FFFFFF</color>
   <color name="transparent">#00FFFFFF</color>
 
   <color name="seekbar_track_background">#0C000000</color>

@@ -35,7 +35,7 @@
   </style>
 
   <style name="TextAppearance.Uplift.PanelHeader" parent="None">
-    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textColor">?android:textColorPrimaryInverse</item>
     <item name="android:textSize">@dimen/panel_header_text</item>
     <item name="fontFamily">@font/arvo_bold</item>
   </style>

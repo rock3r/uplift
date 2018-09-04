@@ -4,43 +4,43 @@
   xmlns:tools="http://schemas.android.com/tools"
   tools:showIn="@layout/activity_main_expanded">
 
+  <View
+    android:id="@+id/panelHeader"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="@dimen/match_constraint"
+    android:background="@drawable/panel_header_bg"
+    android:clickable="true"
+    android:elevation="@dimen/panel_header_elevation"
+    android:focusable="true"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/panelHeaderLabel"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="@id/panelHeaderLabel" />
+
   <TextView
     android:id="@+id/panelHeaderLabel"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/panel_content_top_padding"
-    android:elevation="@dimen/panel_elevation"
+    android:layout_marginStart="@dimen/panel_content_margin"
+    android:elevation="@dimen/panel_header_elevation"
     android:paddingTop="@dimen/panel_header_vertical_padding"
     android:paddingBottom="@dimen/panel_header_vertical_padding"
     android:text="@string/tweak_shadow"
     android:textAppearance="@style/TextAppearance.Uplift.PanelHeader"
-    app:layout_constraintStart_toStartOf="@id/start_content_margin"
-    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@id/expandCollapseImage"
-    app:layout_constraintBottom_toTopOf="@id/elevationLabel"
+    app:layout_constraintBottom_toTopOf="@id/panelContentTopGuideline"
     app:layout_constraintVertical_bias="1" />
 
   <me.seebrock3r.elevationtester.CheckableImageView
     android:id="@+id/expandCollapseImage"
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/match_constraint"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/panel_content_margin"
     android:checked="false"
-    android:elevation="@dimen/panel_elevation"
+    android:elevation="@dimen/panel_header_elevation"
     android:src="@drawable/selector_expand_collapse"
-    android:tint="@color/textPrimary"
-    app:layout_constraintTop_toTopOf="@id/panelHeaderLabel"
-    app:layout_constraintEnd_toStartOf="@id/end_content_margin"
-    app:layout_constraintBottom_toBottomOf="@id/panelHeaderLabel" />
-
-  <View
-    android:id="@+id/panelHeader"
-    android:layout_width="@dimen/match_constraint"
-    android:layout_height="@dimen/match_constraint"
-    android:background="?selectableItemBackground"
-    android:clickable="true"
-    android:elevation="@dimen/panel_elevation"
-    android:focusable="true"
-    app:layout_constraintStart_toStartOf="parent"
+    android:tint="?android:textColorPrimaryInverse"
     app:layout_constraintTop_toTopOf="@id/panelHeaderLabel"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toBottomOf="@id/panelHeaderLabel" />

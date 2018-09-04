@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/rootContainer"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  app:layoutDescription="@xml/main_activity_scene"
   tools:context=".MainActivity">
 
   <androidx.appcompat.widget.Toolbar
@@ -18,49 +19,59 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toEndOf="parent" />
 
-  <TextView
-    android:id="@+id/main_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/main_button_margin"
-    android:layout_marginStart="@dimen/main_button_margin"
-    android:background="@drawable/btn_colored_material"
-    android:padding="@dimen/main_button_padding"
-    android:text="@string/drag_up_and_down"
-    android:textAppearance="@style/TextAppearance.Uplift.MainButton"
+  <!-- We need this extra CL to "break" the elevation of the TextView and avoid it showing on top of the panel -->
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/buttonContainer"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="@dimen/match_constraint"
+    android:clipToPadding="false"
+    android:paddingTop="@dimen/main_button_vertical_margin"
+    android:paddingBottom="@dimen/main_button_vertical_margin"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/toolbar"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/panelHeader"
-    app:layout_constraintHorizontal_bias="0.5" />
+    app:layout_constraintTop_toBottomOf="@id/toolbar"
+    app:layout_constraintBottom_toTopOf="@id/panelHeader">
 
-  <View
-    android:id="@+id/panelBackground"
+    <TextView
+      android:id="@+id/mainButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/main_button_margin"
+      android:layout_marginStart="@dimen/main_button_margin"
+      android:background="@drawable/btn_colored_material"
+      android:padding="@dimen/main_button_padding"
+      android:text="@string/use_controls_below"
+      android:textAppearance="@style/TextAppearance.Uplift.MainButton"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintHorizontal_bias="0.5" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <include layout="@layout/include_header" />
+
+  <androidx.core.widget.NestedScrollView
+    android:id="@+id/panelContainer"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="@dimen/match_constraint"
     android:background="@color/white"
     android:elevation="@dimen/panel_elevation"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@id/panelHeader"
+    app:layout_constraintTop_toTopOf="@id/panelContentTopGuideline"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent" />
+    app:layout_constraintBottom_toBottomOf="parent">
 
-  <include layout="@layout/include_header_expanded" />
+    <include layout="@layout/include_panel_controls" />
 
-  <include layout="@layout/include_controls_expanded" />
-
-  <androidx.constraintlayout.widget.Guideline
-    android:id="@+id/start_content_margin"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:layout_constraintGuide_begin="@dimen/panel_content_margin" />
+  </androidx.core.widget.NestedScrollView>
 
   <androidx.constraintlayout.widget.Guideline
-    android:id="@+id/end_content_margin"
-    android:layout_width="wrap_content"
+    android:id="@+id/panelContentTopGuideline"
+    android:layout_width="@dimen/match_constraint"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:layout_constraintGuide_end="@dimen/panel_content_margin" />
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent=".5" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

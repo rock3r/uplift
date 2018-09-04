@@ -17,14 +17,15 @@
   <dimen name="main_button_padding">32dp</dimen>
   <dimen name="main_button_text">16sp</dimen>
   <dimen name="main_button_margin">8dp</dimen>
-  <dimen name="main_button_vertical_margin">16dp</dimen>
+  <dimen name="main_button_vertical_margin">32dp</dimen>
   <dimen name="main_button_initial_elevation">8dp</dimen>
 
   <dimen name="seekbar_height">24dp</dimen>
   <dimen name="value_label_margin_bottom">8dp</dimen>
   <dimen name="seekbar_margin_bottom">24dp</dimen>
 
-  <dimen name="panel_elevation">101dp</dimen>
+  <dimen name="panel_elevation">5dp</dimen>
+  <dimen name="panel_header_elevation">8dp</dimen>
   <dimen name="panel_padding_top">24dp</dimen>
   <dimen name="panel_header_text">14sp</dimen>
   <dimen name="panel_header_vertical_padding">24dp</dimen>
