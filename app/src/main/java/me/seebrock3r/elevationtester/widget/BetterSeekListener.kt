@@ -1,4 +1,4 @@
-package me.seebrock3r.elevationtester
+package me.seebrock3r.elevationtester.widget
 
 import android.widget.SeekBar
 

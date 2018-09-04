@@ -15,6 +15,7 @@ import androidx.transition.TransitionManager
 import kotlinx.android.synthetic.main.activity_main_collapsed.*
 import kotlinx.android.synthetic.main.include_header.*
 import kotlinx.android.synthetic.main.include_panel_controls.*
+import me.seebrock3r.elevationtester.widget.BetterSeekListener
 import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {

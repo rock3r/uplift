@@ -32,7 +32,7 @@
     app:layout_constraintBottom_toTopOf="@id/panelContentTopGuideline"
     app:layout_constraintVertical_bias="1" />
 
-  <me.seebrock3r.elevationtester.CheckableImageView
+  <me.seebrock3r.elevationtester.widget.CheckableImageView
     android:id="@+id/expandCollapseImage"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
