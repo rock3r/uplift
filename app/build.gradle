@@ -12,9 +12,6 @@ android {
         targetSdkVersion 28
         versionCode 2
         versionName '2.0'
-
-        renderscriptTargetApi 21
-        renderscriptSupportModeEnabled true
     }
 }
 
@@ -26,7 +23,9 @@ kotlin {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.annotation:annotation:1.0.0-rc02'
     implementation 'androidx.appcompat:appcompat:1.0.0-rc02'
+    implementation 'androidx.core:core-ktx:1.0.0-rc02'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation 'com.google.android.material:material:1.0.0-rc01'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.25.0'

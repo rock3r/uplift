@@ -2,8 +2,8 @@ package me.seebrock3r.elevationtester.widget
 
 import android.content.Context
 import android.graphics.Bitmap
-import androidx.renderscript.Allocation
-import androidx.renderscript.RenderScript
+import android.renderscript.Allocation
+import android.renderscript.RenderScript
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.Job
