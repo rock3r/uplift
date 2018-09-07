@@ -4,10 +4,11 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="fontFamily">@font/arvo</item>
     <item name="android:textColorPrimary">@color/textPrimary</item>
     <item name="android:textColorSecondary">@color/textSecondary</item>
     <item name="android:windowBackground">@color/windowBackground</item>
-    <item name="fontFamily">@font/arvo</item>
+    <item name="colorViewStyle">@style/Widget.ColorView</item>
   </style>
 
   <style name="None" />

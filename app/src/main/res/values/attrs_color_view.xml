@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <declare-styleable name="ColorView">
+    <attr name="android:text" />
+    <attr name="color" format="color" />
+  </declare-styleable>
+
+  <style name="Widget.ColorView" parent="android:Widget.Material">
+    <item name="android:background">?selectableItemBackground</item>
+  </style>
+
+  <attr name="colorViewStyle" format="reference" />
+
+</resources>

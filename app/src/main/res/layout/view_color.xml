@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+  <TextView
+    android:id="@+id/colorView_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.Uplift.SeekBarLabel"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    tools:text="Label" />
+
+  <View
+    android:id="@+id/colorView_color"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="@dimen/match_constraint"
+    android:background="@drawable/color_preview"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/colorView_value"
+    app:layout_constraintBottom_toBottomOf="@id/colorView_value"
+    app:layout_constraintDimensionRatio="1"
+    tools:backgroundTint="#000" />
+
+  <TextView
+    android:id="@+id/colorView_value"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:textAppearance="@style/TextAppearance.Uplift.SeekBarValue"
+    app:layout_constraintTop_toBottomOf="@id/colorView_label"
+    app:layout_constraintStart_toEndOf="@id/colorView_color"
+    tools:text="#FF000000" />
+
+</merge>
