@@ -8,6 +8,7 @@
 
   <style name="Widget.ColorView" parent="android:Widget.Material">
     <item name="android:background">?selectableItemBackground</item>
+    <item name="android:padding">8dp</item>
     <item name="android:text">[Label missing]</item>
     <item name="color">#f000</item>
   </style>

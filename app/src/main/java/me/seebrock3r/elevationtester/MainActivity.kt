@@ -43,10 +43,14 @@ class MainActivity : AppCompatActivity() {
         setupYShiftControls()
 
         setupDragYToMove()
+
         panelCollapsed()
 
         val initialButtonElevationDp = resources.getDimensionDpSize(R.dimen.main_button_initial_elevation).roundToInt()
         elevationBar.progress = initialButtonElevationDp
+
+        ambientColor.isEnabled = isAndroidPOrLater
+        pointColor.isEnabled = isAndroidPOrLater
     }
 
     private fun setupPanelHeaderControls() {

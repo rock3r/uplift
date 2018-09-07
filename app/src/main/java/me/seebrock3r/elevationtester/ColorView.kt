@@ -17,17 +17,20 @@ class ColorView @JvmOverloads constructor(
     defStyleAttr: Int = R.attr.colorViewStyle
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
+    private val viewsAreReady
+        get() = colorView_label != null
+
     var text: String? = null
         set(newText) {
             field = newText
-            if (!isInEditMode) colorView_label.text = text
+            if (viewsAreReady) colorView_label?.text = text
         }
 
     @ColorInt
     var color: Int = Color.BLACK
         set(newColor) {
             field = newColor
-            if (!isInEditMode) onColorChanged()
+            if (viewsAreReady) onColorChanged()
         }
 
     init {
@@ -45,10 +48,8 @@ class ColorView @JvmOverloads constructor(
 
         LayoutInflater.from(context).inflate(R.layout.view_color, this, true)
 
-        if (isInEditMode) {
-            onColorChanged()
-            colorView_label.text = text
-        }
+        onColorChanged()
+        colorView_label.text = text
     }
 
     @SuppressLint("SetTextI18n") // This doesn't require i18n, it's a hex integer representation
