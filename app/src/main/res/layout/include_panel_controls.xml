@@ -137,4 +137,36 @@
     app:layout_constraintEnd_toEndOf="parent"
     tools:progress="100" />
 
+  <TextView
+    android:id="@+id/shadowColorLabel"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/match_constraint"
+    android:layout_marginTop="@dimen/seekbar_margin_bottom"
+    android:text="@string/shadow_color_label"
+    android:textAppearance="@style/TextAppearance.Uplift.SeekBarLabel"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/yShiftBar" />
+
+  <me.seebrock3r.elevationtester.ColorView
+    android:id="@+id/ambientColor"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/value_label_margin_bottom"
+    android:text="@string/shadow_ambient_color_label"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/shadowColorLabel"
+    app:layout_constraintEnd_toStartOf="@id/pointColor"
+    app:layout_constraintHorizontal_chainStyle="spread"
+    tools:color="#f00" />
+
+  <me.seebrock3r.elevationtester.ColorView
+    android:id="@+id/pointColor"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/shadow_point_color_label"
+    app:layout_constraintStart_toEndOf="@id/ambientColor"
+    app:layout_constraintTop_toTopOf="@id/ambientColor"
+    app:layout_constraintEnd_toEndOf="parent"
+    tools:color="#0f0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

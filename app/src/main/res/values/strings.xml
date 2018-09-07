@@ -14,5 +14,8 @@
   <string name="drag_up_and_down">Drag up and down</string>
   <string name="use_controls_below">Use controls below</string>
   <string name="tweak_shadow">Shadow controls</string>
+  <string name="shadow_color_label">Shadow color (Android P+ only)</string>
+  <string name="shadow_ambient_color_label">Ambient</string>
+  <string name="shadow_point_color_label">Point</string>
 
 </resources>
