@@ -147,7 +147,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/yShiftBar" />
 
-  <me.seebrock3r.elevationtester.ColorView
+  <me.seebrock3r.elevationtester.widget.ColorView
     android:id="@+id/ambientColor"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
     app:layout_constraintHorizontal_chainStyle="spread"
     tools:color="#f00" />
 
-  <me.seebrock3r.elevationtester.ColorView
+  <me.seebrock3r.elevationtester.widget.ColorView
     android:id="@+id/pointColor"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

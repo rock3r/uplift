@@ -1,4 +1,4 @@
-package me.seebrock3r.elevationtester
+package me.seebrock3r.elevationtester.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,6 +10,7 @@ import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.withStyledAttributes
 import kotlinx.android.synthetic.main.view_color.view.*
+import me.seebrock3r.elevationtester.R
 
 class ColorView @JvmOverloads constructor(
     context: Context,
