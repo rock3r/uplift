@@ -34,6 +34,8 @@ class ColorView @JvmOverloads constructor(
             if (viewsAreReady) onColorChanged()
         }
 
+    var onColorChangedListener: OnColorChangedListener? = null
+
     init {
         context.withStyledAttributes(attrs, R.styleable.ColorView, defStyleAttr) {
             if (hasValue(R.styleable.ColorView_android_text)) text = getString(R.styleable.ColorView_android_text)
@@ -57,5 +59,9 @@ class ColorView @JvmOverloads constructor(
     private fun onColorChanged() {
         colorView_color?.backgroundTintList = ColorStateList.valueOf(color)
         colorView_value?.text = String.format("#%08X", 0xFFFFFFFF and color.toLong())
+
+        onColorChangedListener?.invoke(this)
     }
 }
+
+typealias OnColorChangedListener = (view: ColorView) -> Unit

@@ -1,21 +1,24 @@
 <resources>
 
-  <string name="app_name">Uplift</string>
+    <string name="app_name">Uplift</string>
 
-  <string name="elevation_label">Elevation</string>
-  <string name="elevation_value">%ddp</string>
-  <string name="x_scale_label">Scale X</string>
-  <string name="x_scale_value">%d%%</string>
-  <string name="y_scale_label">Scale Y</string>
-  <string name="y_scale_value">%d%%</string>
-  <string name="y_shift_label">Shift Y</string>
-  <string name="y_shift_value">%ddp</string>
+    <string name="elevation_label">Elevation</string>
+    <string name="elevation_value">%ddp</string>
+    <string name="x_scale_label">Scale X</string>
+    <string name="x_scale_value">%d%%</string>
+    <string name="y_scale_label">Scale Y</string>
+    <string name="y_scale_value">%d%%</string>
+    <string name="y_shift_label">Shift Y</string>
+    <string name="y_shift_value">%ddp</string>
 
-  <string name="drag_up_and_down">Drag up and down</string>
-  <string name="use_controls_below">Use controls below</string>
-  <string name="tweak_shadow">Shadow controls</string>
-  <string name="shadow_color_label">Shadow color (Android P+ only)</string>
-  <string name="shadow_ambient_color_label">Ambient</string>
-  <string name="shadow_point_color_label">Point</string>
+    <string name="drag_up_and_down">Drag up and down</string>
+    <string name="use_controls_below">Use controls below</string>
+    <string name="tweak_shadow">Shadow controls</string>
+    <string name="shadow_color_label">Shadow color (Android P+ only)</string>
+    <string name="shadow_ambient_color_label">Ambient</string>
+    <string name="shadow_point_color_label">Point</string>
+  <string name="color_picker_title_ambient">Select color</string>
+    <string name="brightness_label">Brightness:</string>
+    <string name="alpha_label">Alpha:</string>
 
 </resources>

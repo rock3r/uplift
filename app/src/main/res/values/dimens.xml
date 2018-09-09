@@ -3,6 +3,8 @@
 
   <dimen name="match_constraint">0dp</dimen>
 
+  <dimen name="floating_window_z">16dp</dimen>
+
   <dimen name="control_corner_material">2dp</dimen>
   <dimen name="text_normal">14sp</dimen>
 

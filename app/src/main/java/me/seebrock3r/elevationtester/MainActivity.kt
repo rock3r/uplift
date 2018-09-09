@@ -1,10 +1,11 @@
 package me.seebrock3r.elevationtester
 
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import android.widget.SeekBar
 import androidx.annotation.DimenRes
 import androidx.annotation.Px
@@ -16,7 +17,11 @@ import kotlinx.android.synthetic.main.activity_main_collapsed.*
 import kotlinx.android.synthetic.main.include_header.*
 import kotlinx.android.synthetic.main.include_panel_controls.*
 import me.seebrock3r.elevationtester.widget.BetterSeekListener
+import me.seebrock3r.elevationtester.widget.ColorView
 import kotlin.math.roundToInt
+
+private const val REQUEST_AMBIENT_COLOR = 7367
+private const val REQUEST_SPOT_COLOR = 7368
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         setupElevationControls()
         setupScaleXYControls()
         setupYShiftControls()
+        setupColorPickers()
 
         setupDragYToMove()
 
@@ -50,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         elevationBar.progress = initialButtonElevationDp
 
         ambientColor.isEnabled = isAndroidPOrLater
-        pointColor.isEnabled = isAndroidPOrLater
+        spotColor.isEnabled = isAndroidPOrLater
     }
 
     private fun setupPanelHeaderControls() {
@@ -61,7 +67,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTransitionCompleted(view: MotionLayout, state: Int) {
                 panelExpanded = state == R.layout.activity_main_expanded
-                Log.i("!!!!!!!", "Expanded: $panelExpanded")
                 TransitionManager.beginDelayedTransition(view)
                 if (panelExpanded) panelExpanded() else panelCollapsed()
             }
@@ -153,6 +158,30 @@ class MainActivity : AppCompatActivity() {
         yShiftValue.text = getString(R.string.y_shift_value, adjustedShiftYDp)
     }
 
+    private fun setupColorPickers() {
+        ambientColor.setOnClickListener { onColorPickerClicked(ambientColor) }
+        spotColor.setOnClickListener { onColorPickerClicked(spotColor) }
+        ambientColor.onColorChangedListener = ::onColorChanged
+        spotColor.onColorChangedListener = ::onColorChanged
+    }
+
+    private fun onColorPickerClicked(colorView: ColorView) {
+        val intent = Intent(this, ColorPickerActivity::class.java).apply {
+            val boundsOnScreen = colorView.boundsOnScreen()
+            putExtra("anchorBounds", boundsOnScreen)
+        }
+        val requestCode = if (colorView.id == R.id.ambientColor) REQUEST_AMBIENT_COLOR else REQUEST_SPOT_COLOR
+
+        startActivityForResult(intent, requestCode)
+    }
+
+    private fun onColorChanged(colorView: ColorView) {
+        when (colorView.id) {
+            R.id.ambientColor -> mainButton.outlineAmbientShadowColor = colorView.color
+            R.id.spotColor -> mainButton.outlineSpotShadowColor = colorView.color
+        }
+    }
+
     private fun setupDragYToMove() {
         buttonVerticalMarginPixel = resources.getDimensionPixelSize(R.dimen.main_button_vertical_margin)
 
@@ -206,6 +235,18 @@ class MainActivity : AppCompatActivity() {
 
         return true
     }
+}
+
+private fun View.boundsOnScreen(): Rect {
+    val locationOnScreen = IntArray(2)
+    getLocationOnScreen(locationOnScreen)
+
+    return Rect(
+        locationOnScreen[0],
+        locationOnScreen[1],
+        locationOnScreen[0] + width,
+        locationOnScreen[1] + height
+    )
 }
 
 private fun Resources.getDimensionDpSize(@DimenRes dimensionResId: Int): Float =

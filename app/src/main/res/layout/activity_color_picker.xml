@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:paddingBottom="16dp"
+  android:clickable="true"
+  android:focusable="true">
+
+  <TextView
+    android:id="@+id/dialogTitle"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="wrap_content"
+    android:background="?colorPrimary"
+    android:fontFamily="@font/arvo_bold"
+    android:padding="16dp"
+    android:text="@string/color_picker_title_ambient"
+    android:textColor="@color/white"
+    android:textFontWeight="700"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+  <View
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="@dimen/match_constraint"
+    android:layout_margin="8dp"
+    android:background="@drawable/color_preview"
+    app:layout_constraintDimensionRatio="1"
+    app:layout_constraintTop_toTopOf="@id/dialogTitle"
+    app:layout_constraintEnd_toEndOf="@id/dialogTitle"
+    app:layout_constraintBottom_toBottomOf="@id/dialogTitle" />
+
+  <me.seebrock3r.elevationtester.widget.ColorWheelView
+    android:id="@+id/dialogColorWheel"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="@dimen/match_constraint"
+    android:layout_marginTop="16dp"
+    android:maxHeight="300dp"
+    app:layout_constraintStart_toStartOf="@id/contentGuidelineStart"
+    app:layout_constraintTop_toBottomOf="@id/dialogTitle"
+    app:layout_constraintEnd_toEndOf="@id/contentGuidelineEnd"
+    app:layout_constraintDimensionRatio="1" />
+
+  <TextView
+    android:id="@+id/dialogAlphaLabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:gravity="start|center_vertical"
+    android:text="@string/alpha_label"
+    app:layout_constraintStart_toStartOf="@id/contentGuidelineStart"
+    app:layout_constraintTop_toBottomOf="@id/dialogColorWheel" />
+
+  <SeekBar
+    android:id="@+id/colorAlpha"
+    style="@style/Widget.Uplift.SeekBar"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="@dimen/seekbar_height"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:max="@integer/max_alpha_progress"
+    app:layout_constraintStart_toEndOf="@id/dialogAlphaLabel"
+    app:layout_constraintTop_toTopOf="@id/dialogAlphaLabel"
+    app:layout_constraintEnd_toStartOf="@id/dialogAlphaValue"
+    app:layout_constraintBottom_toBottomOf="@id/dialogAlphaLabel"
+    tools:progress="10" />
+
+  <TextView
+    android:id="@+id/dialogAlphaValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="end|center_vertical"
+    app:layout_constraintTop_toTopOf="@id/dialogAlphaLabel"
+    app:layout_constraintEnd_toStartOf="@id/contentGuidelineEnd"
+    app:layout_constraintBottom_toBottomOf="@id/dialogAlphaLabel"
+    tools:text="255" />
+
+  <TextView
+    android:id="@+id/dialogBrightnessLabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:gravity="start|center_vertical"
+    android:text="@string/brightness_label"
+    app:layout_constraintStart_toStartOf="@id/contentGuidelineStart"
+    app:layout_constraintTop_toBottomOf="@id/dialogAlphaLabel" />
+
+  <SeekBar
+    android:id="@+id/colorBrightness"
+    style="@style/Widget.Uplift.SeekBar"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="@dimen/seekbar_height"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:max="@integer/max_brightness_progress"
+    app:layout_constraintStart_toEndOf="@id/dialogBrightnessLabel"
+    app:layout_constraintTop_toTopOf="@id/dialogBrightnessLabel"
+    app:layout_constraintEnd_toStartOf="@id/dialogBrightnessValue"
+    app:layout_constraintBottom_toBottomOf="@id/dialogBrightnessLabel"
+    tools:progress="10" />
+
+  <TextView
+    android:id="@+id/dialogBrightnessValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="end|center_vertical"
+    app:layout_constraintTop_toTopOf="@id/dialogBrightnessLabel"
+    app:layout_constraintEnd_toStartOf="@id/contentGuidelineEnd"
+    app:layout_constraintBottom_toBottomOf="@id/dialogBrightnessLabel"
+    tools:text="255" />
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/contentGuidelineStart"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_begin="16dp" />
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/contentGuidelineEnd"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_end="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

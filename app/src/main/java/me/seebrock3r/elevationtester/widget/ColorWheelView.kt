@@ -20,6 +20,11 @@ class ColorWheelView @JvmOverloads constructor(
 
     var brightness: Byte by bitmapGenerator
 
+    init {
+        isClickable = true
+        isFocusable = true
+    }
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
 

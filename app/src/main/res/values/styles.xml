@@ -11,6 +11,26 @@
     <item name="colorViewStyle">@style/Widget.ColorView</item>
   </style>
 
+  <!-- Copied from support library's: v7/appcompat/res/values/themes_base.xml -->
+  <style name="Theme.Uplift.Dialog" parent="Theme.Uplift">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+    <item name="android:windowElevation">@dimen/floating_window_z</item>
+    <item name="android:windowCloseOnTouchOutside">true</item>
+    <item name="android:windowBackground">@drawable/dialog_background</item>
+    <item name="android:colorBackground">?attr/colorBackgroundFloating</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+
+    <item name="android:windowFrame">@null</item>
+    <item name="android:windowTitleStyle">@style/RtlOverlay.DialogWindowTitle.AppCompat</item>
+    <item name="android:windowTitleBackgroundStyle">@style/Base.DialogWindowTitleBackground.AppCompat</item>
+    <item name="android:windowIsFloating">true</item>
+    <item name="android:backgroundDimEnabled">false</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
+    <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+  </style>
+
   <style name="None" />
 
   <style name="Uplift.ActionBar" parent="Widget.AppCompat.Toolbar">

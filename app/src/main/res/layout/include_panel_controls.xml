@@ -155,12 +155,12 @@
     android:text="@string/shadow_ambient_color_label"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/shadowColorLabel"
-    app:layout_constraintEnd_toStartOf="@id/pointColor"
+    app:layout_constraintEnd_toStartOf="@id/spotColor"
     app:layout_constraintHorizontal_chainStyle="spread"
     tools:color="#f00" />
 
   <me.seebrock3r.elevationtester.widget.ColorView
-    android:id="@+id/pointColor"
+    android:id="@+id/spotColor"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/shadow_point_color_label"
