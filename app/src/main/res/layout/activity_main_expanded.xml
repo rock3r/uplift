@@ -10,8 +10,8 @@
 
   <androidx.appcompat.widget.Toolbar
     android:id="@+id/toolbar"
-    style="@style/Uplift.ActionBar"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    style="@style/Uplift.ActionBar"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="wrap_content"
     android:minHeight="?attr/actionBarSize"
@@ -24,20 +24,20 @@
     android:id="@+id/buttonContainer"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="@dimen/match_constraint"
-    android:clipToPadding="false"
     android:paddingTop="@dimen/main_button_vertical_margin"
     android:paddingBottom="@dimen/main_button_vertical_margin"
+    android:clipToPadding="false"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toBottomOf="@id/toolbar"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toTopOf="@id/panelHeader">
 
     <TextView
       android:id="@+id/mainButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="@dimen/main_button_margin"
       android:layout_marginStart="@dimen/main_button_margin"
+      android:layout_marginEnd="@dimen/main_button_margin"
       android:background="@drawable/btn_colored_material"
       android:padding="@dimen/main_button_padding"
       android:text="@string/use_controls_below"

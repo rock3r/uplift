@@ -4,7 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
-  tools:padding="16dp"
+  tools:padding="@dimen/color_view_padding"
   tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
   <TextView
@@ -13,8 +13,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:alpha=".75"
-    app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
     tools:text="Label" />
 
   <View
@@ -30,13 +30,13 @@
 
   <TextView
     android:id="@+id/colorView_value"
-    style="@style/TextAppearance.Uplift.SeekBarValue"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    app:layout_constraintTop_toBottomOf="@id/colorView_label"
+    android:layout_marginStart="@dimen/color_view_value_margin"
+    android:layout_marginTop="@dimen/color_view_value_margin"
+    android:textAppearance="@style/TextAppearance.Uplift.SeekBarValue"
     app:layout_constraintStart_toEndOf="@id/colorView_color"
+    app:layout_constraintTop_toBottomOf="@id/colorView_label"
     tools:text="#FF000000" />
 
 </merge>

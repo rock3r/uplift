@@ -5,23 +5,36 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:paddingBottom="16dp"
-  android:clickable="true"
-  android:focusable="true">
+  android:paddingBottom="16dp">
 
   <TextView
     android:id="@+id/dialogTitle"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="wrap_content"
+    android:paddingStart="56dp"
+    android:paddingTop="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="16dp"
     android:background="?colorPrimary"
     android:fontFamily="@font/arvo_bold"
-    android:padding="16dp"
     android:text="@string/color_picker_title_ambient"
     android:textColor="@color/white"
-    android:textFontWeight="700"
+    android:textSize="18sp"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toEndOf="parent" />
+
+  <ImageButton
+    android:id="@+id/dialogClose"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="@dimen/match_constraint"
+    android:background="?selectableItemBackground"
+    android:contentDescription="@string/close"
+    android:src="@drawable/ic_close"
+    app:layout_constraintStart_toStartOf="@id/dialogTitle"
+    app:layout_constraintTop_toTopOf="@id/dialogTitle"
+    app:layout_constraintBottom_toBottomOf="@id/dialogTitle"
+    app:layout_constraintDimensionRatio="1" />
 
   <View
     android:id="@+id/dialogColorPreview"
@@ -29,20 +42,20 @@
     android:layout_height="@dimen/match_constraint"
     android:layout_margin="8dp"
     android:background="@drawable/color_preview"
-    app:layout_constraintDimensionRatio="1"
     app:layout_constraintTop_toTopOf="@id/dialogTitle"
     app:layout_constraintEnd_toEndOf="@id/dialogTitle"
-    app:layout_constraintBottom_toBottomOf="@id/dialogTitle" />
+    app:layout_constraintBottom_toBottomOf="@id/dialogTitle"
+    app:layout_constraintDimensionRatio="1" />
 
   <me.seebrock3r.elevationtester.widget.ColorWheelView
     android:id="@+id/dialogColorWheel"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="@dimen/match_constraint"
-    android:layout_marginTop="16dp"
     android:maxHeight="300dp"
-    app:layout_constraintStart_toStartOf="@id/contentGuidelineStart"
+    android:padding="24dp"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/dialogTitle"
-    app:layout_constraintEnd_toEndOf="@id/contentGuidelineEnd"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintDimensionRatio="1" />
 
   <TextView

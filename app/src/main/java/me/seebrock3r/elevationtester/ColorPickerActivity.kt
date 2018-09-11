@@ -42,6 +42,8 @@ class ColorPickerActivity : AppCompatActivity() {
         setupColorWheel()
 
         dialogColorWheel.setColor(color)
+
+        dialogClose.setOnClickListener { finish() }
     }
 
     private fun setupBrightnessControls(color: Int) {

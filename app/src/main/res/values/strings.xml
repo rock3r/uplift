@@ -17,9 +17,10 @@
   <string name="shadow_color_label">Shadow color (Android P+ only)</string>
   <string name="shadow_ambient_color_label">Ambient</string>
   <string name="shadow_spot_color_label">Spot</string>
-  <string name="color_picker_title_ambient">Select ambient color</string>
-  <string name="color_picker_title_spot">Select spot color</string>
+  <string name="color_picker_title_ambient">Ambient color</string>
+  <string name="color_picker_title_spot">Spot color</string>
   <string name="brightness_label">Brightness:</string>
   <string name="alpha_label">Alpha:</string>
+  <string name="close">Close</string>
 
 </resources>

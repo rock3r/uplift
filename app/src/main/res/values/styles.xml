@@ -70,7 +70,6 @@
   <style name="TextAppearance.Uplift.SeekBarValue" parent="None">
     <item name="android:textColor">?android:textColorSecondary</item>
     <item name="android:textSize">@dimen/seekbar_label_text</item>
-    <item name="fontFamily">@font/arvo_bold</item>
   </style>
 
 </resources>
