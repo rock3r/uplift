@@ -1,5 +1,6 @@
 package me.seebrock3r.elevationtester.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -68,6 +69,10 @@ class ColorWheelView @JvmOverloads constructor(
         this.style = Paint.Style.STROKE
     }
 
+    @get:ColorInt
+    val selectedColor: Int
+        get() = Color.HSVToColor(hsv)
+
     init {
         context.withStyledAttributes(attrs, R.styleable.ColorWheelView, defStyleAttr) {
             setColor(getColor(R.styleable.ColorWheelView_initialColor, Color.BLACK))
@@ -81,10 +86,6 @@ class ColorWheelView @JvmOverloads constructor(
         isFocusable = true
         outlineProvider = WheelOutlineProvider()
     }
-
-    @get:ColorInt
-    val selectedColor: Int
-        get() = Color.HSVToColor(hsv)
 
     private fun setColor(@ColorInt newColor: Int) {
         Color.colorToHSV(newColor, hsv)
@@ -122,9 +123,11 @@ class ColorWheelView @JvmOverloads constructor(
     private fun updateWheelAndPicker() {
         bitmapGenerator!!.brightness = (hsv[2] * Byte.MAX_VALUE).toByte()
 
-        val pickerX = Math.acos(hsv[0].toDouble()) * wheelRadius * hsv[1]
-        val pickerY = Math.asin(hsv[0].toDouble()) * wheelRadius * hsv[1]
-        pickerPosition.set(wheelCenter!!.x + pickerX.toFloat(), wheelCenter!!.y + pickerY.toFloat())
+        val hue = Math.toRadians(hsv[0].toDouble())
+        val radius = wheelRadius * hsv[1]
+        val pickerX = wheelCenter!!.x + (Math.cos(hue) * radius)
+        val pickerY = wheelCenter!!.y + (Math.sin(hue) * radius)
+        pickerPosition.set(pickerX.toFloat(), pickerY.toFloat())
     }
 
     override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
@@ -146,6 +149,7 @@ class ColorWheelView @JvmOverloads constructor(
         wheelCenter = PointF(paddingLeft + widthMinusPadding / 2F, paddingTop + heightMinusPadding / 2F)
     }
 
+    @SuppressLint("ClickableViewAccessibility") // TODO: care for a11y
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> isDragging = true
