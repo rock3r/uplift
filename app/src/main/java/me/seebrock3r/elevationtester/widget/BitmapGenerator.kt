@@ -11,8 +11,6 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import me.seebrock3r.elevationtester.widget.colorwheel.ScriptC_ColorWheel
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
 
 /*
  * This file was adapted from StylingAndroid's repo: https://github.com/StylingAndroid/ColourWheel
@@ -21,11 +19,15 @@ class BitmapGenerator(
     private val androidContext: Context,
     private val config: Bitmap.Config,
     private val observer: BitmapObserver
-) : ReadWriteProperty<Any, Byte> {
+) {
 
     private val size = Size(0, 0)
 
     var brightness = Byte.MAX_VALUE
+        set(value) {
+            field = value
+            generate()
+        }
 
     private var rsCreation: Deferred<RenderScript> = async(CommonPool) {
         RenderScript.create(androidContext).also {
@@ -57,14 +59,6 @@ class BitmapGenerator(
 
     private val colourWheelScript = AutoCreate(ScriptC_ColorWheel::destroy) {
         ScriptC_ColorWheel(renderscript)
-    }
-
-    override fun getValue(thisRef: Any, property: KProperty<*>): Byte =
-        brightness
-
-    override fun setValue(thisRef: Any, property: KProperty<*>, value: Byte) {
-        brightness = value
-        generate()
     }
 
     fun setSize(width: Int, height: Int) {

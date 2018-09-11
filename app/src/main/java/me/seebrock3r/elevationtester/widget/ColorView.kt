@@ -34,7 +34,7 @@ class ColorView @JvmOverloads constructor(
             if (viewsAreReady) onColorChanged()
         }
 
-    var onColorChangedListener: OnColorChangedListener? = null
+    var onColorChangedListener: ((view: ColorView) -> Unit)? = null
 
     init {
         context.withStyledAttributes(attrs, R.styleable.ColorView, defStyleAttr) {
@@ -63,5 +63,3 @@ class ColorView @JvmOverloads constructor(
         onColorChangedListener?.invoke(this)
     }
 }
-
-typealias OnColorChangedListener = (view: ColorView) -> Unit

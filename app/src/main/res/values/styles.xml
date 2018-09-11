@@ -9,6 +9,7 @@
     <item name="android:textColorSecondary">@color/textSecondary</item>
     <item name="android:windowBackground">@color/windowBackground</item>
     <item name="colorViewStyle">@style/Widget.ColorView</item>
+    <item name="colorWheelViewStyle">@style/Widget.ColorWheelView</item>
   </style>
 
   <!-- Copied from support library's: v7/appcompat/res/values/themes_base.xml -->

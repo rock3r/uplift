@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <declare-styleable name="ColorWheelView">
+    <attr name="initialColor" format="color" />
+    <attr name="pickerClickedRadius" format="dimension" />
+    <attr name="pickerIdleRadius" format="dimension" />
+    <attr name="pickerStrokeWidth" format="dimension" />
+    <attr name="pickerSnapThreshold" format="dimension" />
+  </declare-styleable>
+
+  <style name="Widget.ColorWheelView" parent="android:Widget.Material">
+    <item name="initialColor">#f000</item>
+    <item name="pickerClickedRadius">24dp</item>
+    <item name="pickerIdleRadius">8dp</item>
+    <item name="pickerStrokeWidth">2dp</item>
+    <item name="pickerSnapThreshold">5dp</item>
+  </style>
+
+  <attr name="colorWheelViewStyle" format="reference" />
+
+</resources>

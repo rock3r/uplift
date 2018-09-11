@@ -55,7 +55,7 @@
     app:layout_constraintTop_toBottomOf="@id/dialogColorWheel" />
 
   <SeekBar
-    android:id="@+id/colorAlpha"
+    android:id="@+id/dialogColorAlpha"
     style="@style/Widget.Uplift.SeekBar"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="@dimen/seekbar_height"
@@ -89,7 +89,7 @@
     app:layout_constraintTop_toBottomOf="@id/dialogAlphaLabel" />
 
   <SeekBar
-    android:id="@+id/colorBrightness"
+    android:id="@+id/dialogColorBrightness"
     style="@style/Widget.Uplift.SeekBar"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="@dimen/seekbar_height"
