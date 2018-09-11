@@ -1,5 +1,6 @@
 package me.seebrock3r.elevationtester
 
+import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Rect
@@ -166,10 +167,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onColorPickerClicked(colorView: ColorView) {
-        val intent = Intent(this, ColorPickerActivity::class.java).apply {
-            val boundsOnScreen = colorView.boundsOnScreen()
-            putExtra("anchorBounds", boundsOnScreen)
-        }
+        val title = getString(
+            if (colorView.id == R.id.ambientColor) R.string.color_picker_title_ambient else R.string.color_picker_title_spot
+        )
+        val boundsOnScreen = colorView.boundsOnScreen()
+        val intent = ColorPickerActivity.createIntent(this, title, colorView.color, boundsOnScreen)
+
         val requestCode = if (colorView.id == R.id.ambientColor) REQUEST_AMBIENT_COLOR else REQUEST_SPOT_COLOR
 
         startActivityForResult(intent, requestCode)
@@ -234,6 +237,21 @@ class MainActivity : AppCompatActivity() {
             .duration = resources.getInteger(R.integer.animation_duration_drag_end).toLong()
 
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode != Activity.RESULT_OK) {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+
+        when (requestCode) {
+            REQUEST_AMBIENT_COLOR-> ColorPickerActivity.extractResultFrom(data)?.let { selectedColor ->
+                ambientColor.color = selectedColor
+            }
+            REQUEST_SPOT_COLOR-> ColorPickerActivity.extractResultFrom(data)?.let { selectedColor ->
+                spotColor.color = selectedColor
+            }
+        }
     }
 }
 

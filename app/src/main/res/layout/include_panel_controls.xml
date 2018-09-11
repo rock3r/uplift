@@ -163,7 +163,7 @@
     android:id="@+id/spotColor"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/shadow_point_color_label"
+    android:text="@string/shadow_spot_color_label"
     app:layout_constraintStart_toEndOf="@id/ambientColor"
     app:layout_constraintTop_toTopOf="@id/ambientColor"
     app:layout_constraintEnd_toEndOf="parent"

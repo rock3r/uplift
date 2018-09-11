@@ -87,7 +87,7 @@ class ColorWheelView @JvmOverloads constructor(
         outlineProvider = WheelOutlineProvider()
     }
 
-    private fun setColor(@ColorInt newColor: Int) {
+    fun setColor(@ColorInt newColor: Int) {
         Color.colorToHSV(newColor, hsv)
         onColorChangedListener?.invoke(newColor)
 
