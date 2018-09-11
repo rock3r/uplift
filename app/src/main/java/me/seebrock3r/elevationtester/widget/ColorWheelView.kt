@@ -11,12 +11,13 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewOutlineProvider
+import androidx.annotation.ColorInt
+import androidx.annotation.FloatRange
 import androidx.annotation.Px
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.minus
 import me.seebrock3r.elevationtester.R
-import me.seebrock3r.elevationtester.brightness
 
 /*
  * This file was adapted from StylingAndroid's repo: https://github.com/StylingAndroid/ColourWheel
@@ -25,9 +26,7 @@ class ColorWheelView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = R.attr.colorWheelViewStyle
-) : AppCompatImageView(context, attrs, defStyleAttr), BitmapGenerator.BitmapObserver {
-
-    private val bitmapGenerator = BitmapGenerator(context, Bitmap.Config.ARGB_8888, this)
+) : AppCompatImageView(context, attrs, defStyleAttr) {
 
     @Px
     private var widthMinusPadding: Int = 0
@@ -50,19 +49,16 @@ class ColorWheelView @JvmOverloads constructor(
     @Px
     private var pickerSnapThreshold: Int = 20
 
+    private var bitmapGenerator: BitmapGenerator? = null
+
     private var wheelCenter: PointF? = null
-    private var indicatorCenter: PointF? = null
+    private var pickerPosition = PointF()
 
     private var isDragging: Boolean = false
 
     var onColorChangedListener: ((color: Int) -> Unit)? = null
 
-    var color: Int = Color.BLACK
-        set(value) {
-            field = value
-            bitmapGenerator.brightness = (color.brightness * Byte.MAX_VALUE).toByte()
-            onColorChangedListener?.invoke(value)
-        }
+    private val hsv = FloatArray(3)
 
     private val fillPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
@@ -74,7 +70,7 @@ class ColorWheelView @JvmOverloads constructor(
 
     init {
         context.withStyledAttributes(attrs, R.styleable.ColorWheelView, defStyleAttr) {
-            color = getColor(R.styleable.ColorWheelView_initialColor, Color.BLACK)
+            setColor(getColor(R.styleable.ColorWheelView_initialColor, Color.BLACK))
             pickerClickedRadius = getDimensionPixelSize(R.styleable.ColorWheelView_pickerClickedRadius, 60)
             pickerIdleRadius = getDimensionPixelSize(R.styleable.ColorWheelView_pickerIdleRadius, 20)
             pickerStrokeWidth = getDimensionPixelSize(R.styleable.ColorWheelView_pickerStrokeWidth, 10)
@@ -86,13 +82,49 @@ class ColorWheelView @JvmOverloads constructor(
         outlineProvider = WheelOutlineProvider()
     }
 
+    @get:ColorInt
+    val selectedColor: Int
+        get() = Color.HSVToColor(hsv)
+
+    private fun setColor(@ColorInt newColor: Int) {
+        Color.colorToHSV(newColor, hsv)
+        onColorChangedListener?.invoke(newColor)
+
+        if (isAttachedToWindow) {
+            updateWheelAndPicker()
+        }
+    }
+
+    fun setBrightness(@FloatRange brightness: Float) {
+        hsv[2] = brightness
+        onColorChangedListener?.invoke(selectedColor)
+
+        if (isAttachedToWindow) {
+            updateWheelAndPicker()
+        }
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        bitmapGenerator = BitmapGenerator(context, Bitmap.Config.ARGB_8888, ::setImageBitmap)
+    }
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
 
         if (w != oldw || h != oldh) {
             onDimensionsChanged()
-            bitmapGenerator.setSize(widthMinusPadding, heightMinusPadding)
+            bitmapGenerator!!.setSize(widthMinusPadding, heightMinusPadding)
+            updateWheelAndPicker()
         }
+    }
+
+    private fun updateWheelAndPicker() {
+        bitmapGenerator!!.brightness = (hsv[2] * Byte.MAX_VALUE).toByte()
+
+        val pickerX = Math.acos(hsv[0].toDouble()) * wheelRadius * hsv[1]
+        val pickerY = Math.asin(hsv[0].toDouble()) * wheelRadius * hsv[1]
+        pickerPosition.set(wheelCenter!!.x + pickerX.toFloat(), wheelCenter!!.y + pickerY.toFloat())
     }
 
     override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
@@ -114,27 +146,43 @@ class ColorWheelView @JvmOverloads constructor(
         wheelCenter = PointF(paddingLeft + widthMinusPadding / 2F, paddingTop + heightMinusPadding / 2F)
     }
 
-    override fun bitmapChanged(bitmap: Bitmap) {
-        setImageBitmap(bitmap)
-    }
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> isDragging = true
             MotionEvent.ACTION_UP -> isDragging = false
         }
-        indicatorCenter = event.calculateIndicatorPosition()
-        onIndicatorMoved()
+        updatePickerPosition(event)
+        onPickerMoved()
         return true
     }
 
-    private fun onIndicatorMoved() {
+    private fun updatePickerPosition(event: MotionEvent) {
         val center = wheelCenter!!
-        val indicator = indicatorCenter!!
 
-        val dx: Double = (indicator.x - center.x).toDouble()
-        val dy: Double = (indicator.y - center.y).toDouble()
-        val hsv = FloatArray(3)
+        val dx: Double = (event.x - center.x).toDouble()
+        val dy: Double = (event.y - center.y).toDouble()
+        val distanceFromCenter = Math.sqrt(dx * dx + dy * dy)
+
+        when {
+            distanceFromCenter > wheelRadius -> {
+                // Restrict within wheel diameter
+                val theta = Math.atan2(dy, dx)
+                pickerPosition.x = (center.x + wheelRadius * Math.cos(theta)).toFloat()
+                pickerPosition.y = (center.y + wheelRadius * Math.sin(theta)).toFloat()
+            }
+            distanceFromCenter < pickerSnapThreshold -> {
+                // Snap to center when close enough
+                pickerPosition.set(center.x, center.y)
+            }
+            else -> pickerPosition.set(event.x, event.y)
+        }
+    }
+
+    private fun onPickerMoved() {
+        val center = wheelCenter!!
+
+        val dx: Double = (pickerPosition.x - center.x).toDouble()
+        val dy: Double = (pickerPosition.y - center.y).toDouble()
 
         var hue = Math.toDegrees(Math.atan2(dy, dx)).toFloat()
         if (hue < 0F) hue += 360F
@@ -142,68 +190,42 @@ class ColorWheelView @JvmOverloads constructor(
 
         val distanceFromCenter = Math.sqrt(dx * dx + dy * dy)
         hsv[1] = Math.abs(distanceFromCenter / wheelRadius).toFloat()
-        hsv[2] = color.brightness
+        invalidate()
 
-        color = Color.HSVToColor(hsv)
-    }
-
-    private fun MotionEvent.calculateIndicatorPosition(): PointF {
-        val center = wheelCenter!!
-
-        val dx: Double = (x - center.x).toDouble()
-        val dy: Double = (y - center.y).toDouble()
-        val distanceFromCenter = Math.sqrt(dx * dx + dy * dy)
-        val indicatorPoint = PointF(x, y)
-
-        when {
-            distanceFromCenter > wheelRadius -> {
-                // Restrict within wheel diameter
-                val theta = Math.atan2(dy, dx)
-                indicatorPoint.x = (center.x + wheelRadius * Math.cos(theta)).toFloat()
-                indicatorPoint.y = (center.y + wheelRadius * Math.sin(theta)).toFloat()
-            }
-            distanceFromCenter < pickerSnapThreshold -> {
-                // Snap to center when close enough
-                indicatorPoint.x = center.x
-                indicatorPoint.y = center.y
-            }
-        }
-
-        return indicatorPoint
+        onColorChangedListener?.invoke(selectedColor)
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        indicatorCenter?.let { indicator ->
-            if (isDragging) {
-                fillPaint.color = color
-                val radius = pickerClickedRadius.toFloat()
-                canvas.drawCircle(indicator.x, indicator.y, radius, fillPaint)
-                canvas.drawIndicator(indicator, radius)
-            } else if (indicatorCenter != null) {
-                canvas.drawIndicator(indicator, pickerIdleRadius.toFloat())
-            }
+        if (isDragging) {
+            fillPaint.color = selectedColor
+            val radius = pickerClickedRadius.toFloat()
+            canvas.drawCircle(pickerPosition.x, pickerPosition.y, radius, fillPaint)
+            canvas.drawPickerBorder(radius)
+        } else {
+            canvas.drawPickerBorder(pickerIdleRadius.toFloat())
         }
     }
 
-    private fun Canvas.drawIndicator(indicator: PointF, radius: Float) {
+    private fun Canvas.drawPickerBorder(radius: Float) {
         strokePaint.apply {
             color = Color.WHITE
             strokeWidth = pickerStrokeWidth.toFloat()
         }
-        drawCircle(indicator.x, indicator.y, radius, strokePaint)
+        drawCircle(pickerPosition.x, pickerPosition.y, radius, strokePaint)
 
         strokePaint.apply {
             color = Color.BLACK
             strokeWidth = pickerStrokeWidth / 2f
         }
-        drawCircle(indicator.x, indicator.y, radius - pickerStrokeWidth / 2, strokePaint)
+        drawCircle(pickerPosition.x, pickerPosition.y, radius - pickerStrokeWidth / 2, strokePaint)
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        bitmapGenerator.stop()
+        bitmapGenerator!!.stop()
+        bitmapGenerator = null
     }
 
     private class WheelOutlineProvider : ViewOutlineProvider() {

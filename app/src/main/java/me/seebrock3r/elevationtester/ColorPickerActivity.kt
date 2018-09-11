@@ -1,6 +1,7 @@
 package me.seebrock3r.elevationtester
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +23,7 @@ class ColorPickerActivity : AppCompatActivity() {
             object : BetterSeekListener {
                 @SuppressLint("SetTextI18n")
                 override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                    dialogColorWheel.color = dialogColorWheel.color.setAlphaTo(progress)
+                    dialogColorPreview.backgroundTintList = ColorStateList.valueOf(dialogColorWheel.selectedColor.setAlphaTo(progress))
                     val alpha = progress / dialogColorAlpha.max.toFloat()
                     dialogAlphaValue.text = "%.2f".format(alpha)
                 }
@@ -39,7 +40,7 @@ class ColorPickerActivity : AppCompatActivity() {
                     }
 
                     val brightness = progress / dialogColorBrightness.max.toFloat()
-                    dialogColorWheel.color = dialogColorWheel.color.setBrightnessTo(brightness)
+                    dialogColorWheel.setBrightness(brightness)
                     dialogBrightnessValue.text = "%.2f".format(brightness)
                 }
             }
@@ -50,6 +51,8 @@ class ColorPickerActivity : AppCompatActivity() {
             changingBrightnessFromCode = true
             dialogColorBrightness.progress = (it.brightness * dialogColorBrightness.max).toInt()
             changingBrightnessFromCode = false
+
+            dialogColorPreview.backgroundTintList = ColorStateList.valueOf(it)
         }
     }
 }

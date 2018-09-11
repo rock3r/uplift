@@ -24,6 +24,7 @@
     app:layout_constraintEnd_toEndOf="parent" />
 
   <View
+    android:id="@+id/dialogColorPreview"
     android:layout_width="@dimen/match_constraint"
     android:layout_height="@dimen/match_constraint"
     android:layout_margin="8dp"

@@ -18,7 +18,7 @@ import me.seebrock3r.elevationtester.widget.colorwheel.ScriptC_ColorWheel
 class BitmapGenerator(
     private val androidContext: Context,
     private val config: Bitmap.Config,
-    private val observer: BitmapObserver
+    private val observer: (bitmap: Bitmap) -> Unit
 ) {
 
     private val size = Size(0, 0)
@@ -78,7 +78,7 @@ class BitmapGenerator(
                 generated.value.also {
                     draw(it)
                     launch(UI) {
-                        observer.bitmapChanged(it)
+                        observer(it)
                     }
                 }
             }
@@ -103,10 +103,6 @@ class BitmapGenerator(
         colourWheelScript.clear()
         _renderscript?.destroy()
         rsCreation.takeIf { it.isActive }?.cancel()
-    }
-
-    interface BitmapObserver {
-        fun bitmapChanged(bitmap: Bitmap)
     }
 
     private data class Size(var width: Int, var height: Int) {
