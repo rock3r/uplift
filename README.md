@@ -1,5 +1,4 @@
 ![Uplift](art/github-banner.jpg)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Frock3r%2Fuplift.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Frock3r%2Fuplift?ref=badge_shield)
 
 <p align="center">
 	<img src="art/demo.gif" alt="Uplift demo" />&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -20,9 +19,8 @@ or get the apk from the [Releases tab](https://github.com/rock3r/elevation-teste
 
 <p align="center"><a href="https://play.google.com/store/apps/details?id=me.seebrock3r.elevationtester" target="_blank"><img src="art/get-it-on-google-play.png" alt="Get it on Google Play" width="33%" /></a></p>
 
-## Licence
+## Licence [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Frock3r%2Fuplift.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Frock3r%2Fuplift?ref=badge_shield)
 
 See the [`LICENSE`](LICENSE) file. tl;dr it's Apache 2.0
-
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Frock3r%2Fuplift.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Frock3r%2Fuplift?ref=badge_large)
