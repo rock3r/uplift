@@ -1,4 +1,4 @@
-![Uplift](art/github-banner.jpg)
+![Uplift](art/moving-banner-github.gif)
 
 <p align="center">
 	<img src="art/demo.gif" alt="Uplift demo" />&emsp;&emsp;&emsp;&emsp;&emsp;
