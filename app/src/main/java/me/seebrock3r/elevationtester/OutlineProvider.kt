@@ -1,13 +1,17 @@
 package me.seebrock3r.elevationtester
 
-import android.content.res.Resources
 import android.graphics.Outline
 import android.graphics.Rect
 import android.view.View
 import android.view.ViewOutlineProvider
 import androidx.annotation.FloatRange
 
-internal class TweakableOutlineProvider(val resources: Resources, var scaleX: Float, var scaleY: Float, var yShift: Int) : ViewOutlineProvider() {
+internal class TweakableOutlineProvider(
+    val cornerRadius: Float = 0f,
+    var scaleX: Float = 1f,
+    var scaleY: Float = 1f,
+    var yShift: Int = 0
+) : ViewOutlineProvider() {
 
     private val rect: Rect = Rect()
 
@@ -15,7 +19,7 @@ internal class TweakableOutlineProvider(val resources: Resources, var scaleX: Fl
         view?.background?.copyBounds(rect)
         rect.scale(scaleX, scaleY)
         rect.offset(0, yShift)
-        outline?.setRoundRect(rect, resources.getDimensionPixelSize(R.dimen.control_corner_material).toFloat())
+        outline?.setRoundRect(rect, cornerRadius)
     }
 }
 

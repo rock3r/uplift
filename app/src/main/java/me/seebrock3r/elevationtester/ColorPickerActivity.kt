@@ -41,6 +41,10 @@ class ColorPickerActivity : AppCompatActivity() {
         setupBrightnessControls()
         setupColorWheel()
 
+        val cornerRadius = resources.getDimensionPixelSize(R.dimen.control_corner_material).toFloat()
+        dialogColorPreviewCheckerboard.outlineProvider = TweakableOutlineProvider(cornerRadius = cornerRadius)
+        dialogColorPreviewCheckerboard.clipToOutline = true
+
         dialogColorWheel.setColor(color)
 
         dialogClose.setOnClickListener { finish() }

@@ -36,6 +36,16 @@
     app:layout_constraintBottom_toBottomOf="@id/dialogTitle"
     app:layout_constraintDimensionRatio="1" />
 
+  <FrameLayout
+    android:id="@+id/dialogColorPreviewCheckerboard"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="@dimen/match_constraint"
+    android:background="@drawable/checkerboard"
+    app:layout_constraintStart_toStartOf="@id/dialogColorPreview"
+    app:layout_constraintTop_toTopOf="@id/dialogColorPreview"
+    app:layout_constraintEnd_toEndOf="@id/dialogColorPreview"
+    app:layout_constraintBottom_toBottomOf="@id/dialogColorPreview" />
+
   <View
     android:id="@+id/dialogColorPreview"
     android:layout_width="@dimen/match_constraint"

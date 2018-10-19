@@ -40,7 +40,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_collapsed)
 
-        outlineProvider = TweakableOutlineProvider(resources = resources, scaleX = 1f, scaleY = 1f, yShift = 0)
+        val cornerRadius = resources.getDimensionPixelSize(R.dimen.control_corner_material).toFloat()
+        outlineProvider = TweakableOutlineProvider(cornerRadius = cornerRadius, scaleX = 1f, scaleY = 1f, yShift = 0)
         mainButton.outlineProvider = outlineProvider
 
         setupPanelHeaderControls()
