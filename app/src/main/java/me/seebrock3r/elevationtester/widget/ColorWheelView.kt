@@ -18,6 +18,8 @@ import androidx.annotation.Px
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.minus
+import kotlinx.coroutines.experimental.Dispatchers
+import kotlinx.coroutines.experimental.Job
 import me.seebrock3r.elevationtester.R
 
 /*
@@ -28,6 +30,9 @@ class ColorWheelView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = R.attr.colorWheelViewStyle
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
+
+    private var job: Job? = null
+    private val coroutineContextProducer = { job!! + Dispatchers.Main }
 
     @Px
     private var widthMinusPadding: Int = 0
@@ -107,7 +112,8 @@ class ColorWheelView @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        bitmapGenerator = BitmapGenerator(context, Bitmap.Config.ARGB_8888, ::setImageBitmap)
+        job = Job()
+        bitmapGenerator = BitmapGenerator(context, coroutineContextProducer, Bitmap.Config.ARGB_8888, ::setImageBitmap)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -228,7 +234,9 @@ class ColorWheelView @JvmOverloads constructor(
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        bitmapGenerator!!.stop()
+        job?.cancel()
+        job = null
+        bitmapGenerator?.stop()
         bitmapGenerator = null
     }
 

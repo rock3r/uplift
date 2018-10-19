@@ -4,19 +4,21 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.renderscript.Allocation
 import android.renderscript.RenderScript
-import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.experimental.Dispatchers
+import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import me.seebrock3r.elevationtester.widget.colorwheel.ScriptC_ColorWheel
+import kotlin.coroutines.experimental.CoroutineContext
 
 /*
  * This file was adapted from StylingAndroid's repo: https://github.com/StylingAndroid/ColourWheel
  */
 class BitmapGenerator(
     private val androidContext: Context,
+    private val coroutineUiContextProducer: () -> CoroutineContext,
     private val config: Bitmap.Config,
     private val observer: (bitmap: Bitmap) -> Unit
 ) {
@@ -29,17 +31,14 @@ class BitmapGenerator(
             generate()
         }
 
-    private var rsCreation: Deferred<RenderScript> = async(CommonPool) {
-        RenderScript.create(androidContext).also {
-            _renderscript = it
-        }
+    private var rsCreation: Deferred<RenderScript> = GlobalScope.async(Dispatchers.Default) {
+        RenderScript.create(androidContext).also { renderscript = it }
     }
 
-    private var _renderscript: RenderScript? = null
-    private val renderscript: RenderScript
+    private var renderscript: RenderScript? = null
         get() {
-            assert(rsCreation.isCompleted)
-            return _renderscript as RenderScript
+            require(rsCreation.isCompleted)
+            return field as RenderScript
         }
 
     private var generateProcess: Job? = null
@@ -73,13 +72,11 @@ class BitmapGenerator(
 
     private fun generate() {
         if (size.hasDimensions && generateProcess?.isCompleted != false) {
-            generateProcess = launch(CommonPool) {
+            generateProcess = GlobalScope.async(Dispatchers.Default) {
                 rsCreation.await()
                 generated.value.also {
                     draw(it)
-                    launch(UI) {
-                        observer(it)
-                    }
+                    launch(coroutineUiContextProducer()) { observer(it) }
                 }
             }
         }
@@ -101,7 +98,7 @@ class BitmapGenerator(
         generated.clear()
         generatedAllocation.clear()
         colourWheelScript.clear()
-        _renderscript?.destroy()
+        renderscript?.destroy()
         rsCreation.takeIf { it.isActive }?.cancel()
     }
 
