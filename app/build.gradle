@@ -10,8 +10,8 @@ android {
         applicationId 'me.seebrock3r.elevationtester'
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 3
-        versionName '3.0'
+        versionCode 4
+        versionName '3.1'
     }
 }
 
