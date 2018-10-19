@@ -81,12 +81,12 @@ class ColorPickerActivity : AppCompatActivity() {
     }
 
     private fun setupColorWheel() {
-        dialogColorWheel.onColorChangedListener = { newSelectedColor ->
+        dialogColorWheel.onColorChangedListener = { _ ->
             changingBrightnessFromCode = true
-            dialogColorBrightness.progress = (newSelectedColor.brightness * dialogColorBrightness.max).toInt()
+            dialogColorBrightness.progress = (selectedColor.brightness * dialogColorBrightness.max).toInt()
             changingBrightnessFromCode = false
 
-            dialogColorPreview.backgroundTintList = ColorStateList.valueOf(newSelectedColor)
+            dialogColorPreview.backgroundTintList = ColorStateList.valueOf(selectedColor)
 
             setResult(Activity.RESULT_OK, Intent().apply { putExtra(EXTRA_COLOR, selectedColor) })
         }
