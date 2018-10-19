@@ -1,15 +1,18 @@
 package me.seebrock3r.elevationtester
 
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.SeekBar
 import androidx.annotation.DimenRes
 import androidx.annotation.Px
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         setupElevationControls()
         setupScaleXYControls()
         setupYShiftControls()
-        setupColorPickers()
+        setupColorPickersOnAndroidPAndLater()
 
         setupDragYToMove()
 
@@ -160,13 +163,17 @@ class MainActivity : AppCompatActivity() {
         yShiftValue.text = getString(R.string.y_shift_value, adjustedShiftYDp)
     }
 
-    private fun setupColorPickers() {
+    @TargetApi(Build.VERSION_CODES.P)
+    private fun setupColorPickersOnAndroidPAndLater() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return
+
         ambientColor.setOnClickListener { onColorPickerClicked(ambientColor) }
         spotColor.setOnClickListener { onColorPickerClicked(spotColor) }
         ambientColor.onColorChangedListener = ::onColorChanged
         spotColor.onColorChangedListener = ::onColorChanged
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     private fun onColorPickerClicked(colorView: ColorView) {
         val title = getString(
             if (colorView.id == R.id.ambientColor) R.string.color_picker_title_ambient else R.string.color_picker_title_spot
@@ -179,6 +186,7 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent, requestCode)
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     private fun onColorChanged(colorView: ColorView) {
         when (colorView.id) {
             R.id.ambientColor -> mainButton.outlineAmbientShadowColor = colorView.color
