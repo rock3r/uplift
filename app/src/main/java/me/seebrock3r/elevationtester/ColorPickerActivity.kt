@@ -53,9 +53,11 @@ class ColorPickerActivity : AppCompatActivity() {
             object : BetterSeekListener {
                 @SuppressLint("SetTextI18n")
                 override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                    dialogColorPreview.backgroundTintList = ColorStateList.valueOf(dialogColorWheel.selectedColor.setAlphaTo(progress))
+                    val newSelectedColor = dialogColorWheel.selectedColor.setAlphaTo(progress)
+                    dialogColorPreview.backgroundTintList = ColorStateList.valueOf(newSelectedColor)
                     val alpha = progress / dialogColorAlpha.max.toFloat()
                     dialogAlphaValue.text = "%.2f".format(alpha)
+                    dialogColorWheel.onColorChangedListener?.invoke(newSelectedColor)
                 }
             }
         )
