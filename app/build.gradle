@@ -29,5 +29,5 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.30.2'
 }
