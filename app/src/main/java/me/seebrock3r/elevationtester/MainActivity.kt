@@ -59,9 +59,6 @@ class MainActivity : AppCompatActivity() {
 
         val initialButtonElevationDp = resources.getDimensionDpSize(R.dimen.main_button_initial_elevation).roundToInt()
         elevationBar.progress = initialButtonElevationDp
-
-        ambientColor.isEnabled = isAndroidPOrLater
-        spotColor.isEnabled = isAndroidPOrLater
     }
 
     private fun setupPanelHeaderControls() {
@@ -165,12 +162,15 @@ class MainActivity : AppCompatActivity() {
 
     @TargetApi(Build.VERSION_CODES.P)
     private fun setupColorPickersOnAndroidPAndLater() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return
-
-        ambientColor.setOnClickListener { onColorPickerClicked(ambientColor) }
-        spotColor.setOnClickListener { onColorPickerClicked(spotColor) }
-        ambientColor.onColorChangedListener = ::onColorChanged
-        spotColor.onColorChangedListener = ::onColorChanged
+        if (isAndroidPOrLater) {
+            ambientColor.setOnClickListener { onColorPickerClicked(ambientColor) }
+            spotColor.setOnClickListener { onColorPickerClicked(spotColor) }
+            ambientColor.onColorChangedListener = ::onColorChanged
+            spotColor.onColorChangedListener = ::onColorChanged
+        } else {
+            ambientColor.isEnabled = false
+            spotColor.isEnabled = false
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -254,10 +254,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         when (requestCode) {
-            REQUEST_AMBIENT_COLOR-> ColorPickerActivity.extractResultFrom(data)?.let { selectedColor ->
+            REQUEST_AMBIENT_COLOR -> ColorPickerActivity.extractResultFrom(data)?.let { selectedColor ->
                 ambientColor.color = selectedColor
             }
-            REQUEST_SPOT_COLOR-> ColorPickerActivity.extractResultFrom(data)?.let { selectedColor ->
+            REQUEST_SPOT_COLOR -> ColorPickerActivity.extractResultFrom(data)?.let { selectedColor ->
                 spotColor.color = selectedColor
             }
         }
