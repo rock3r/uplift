@@ -37,8 +37,8 @@ class ColorPickerActivity : AppCompatActivity() {
         dialogTitle.text = intent.getStringExtra(EXTRA_TITLE)
 
         val color = initialColor
-        setupBrightnessControls(color)
-        setupAlphaControls()
+        setupAlphaControls(color)
+        setupBrightnessControls()
         setupColorWheel()
 
         dialogColorWheel.setColor(color)
@@ -46,7 +46,7 @@ class ColorPickerActivity : AppCompatActivity() {
         dialogClose.setOnClickListener { finish() }
     }
 
-    private fun setupBrightnessControls(color: Int) {
+    private fun setupAlphaControls(color: Int) {
         dialogColorAlpha.progress = color.alpha
 
         dialogColorAlpha.setOnSeekBarChangeListener(
@@ -63,7 +63,7 @@ class ColorPickerActivity : AppCompatActivity() {
         )
     }
 
-    private fun setupAlphaControls() {
+    private fun setupBrightnessControls() {
         dialogColorBrightness.setOnSeekBarChangeListener(
             object : BetterSeekListener {
                 @SuppressLint("SetTextI18n")
@@ -81,12 +81,12 @@ class ColorPickerActivity : AppCompatActivity() {
     }
 
     private fun setupColorWheel() {
-        dialogColorWheel.onColorChangedListener = {
+        dialogColorWheel.onColorChangedListener = { newSelectedColor ->
             changingBrightnessFromCode = true
-            dialogColorBrightness.progress = (it.brightness * dialogColorBrightness.max).toInt()
+            dialogColorBrightness.progress = (newSelectedColor.brightness * dialogColorBrightness.max).toInt()
             changingBrightnessFromCode = false
 
-            dialogColorPreview.backgroundTintList = ColorStateList.valueOf(it)
+            dialogColorPreview.backgroundTintList = ColorStateList.valueOf(newSelectedColor)
 
             setResult(Activity.RESULT_OK, Intent().apply { putExtra(EXTRA_COLOR, selectedColor) })
         }

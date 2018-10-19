@@ -90,7 +90,7 @@
     app:layout_constraintTop_toTopOf="@id/dialogAlphaLabel"
     app:layout_constraintEnd_toStartOf="@id/contentGuidelineEnd"
     app:layout_constraintBottom_toBottomOf="@id/dialogAlphaLabel"
-    tools:text="255" />
+    tools:text="0.00" />
 
   <TextView
     android:id="@+id/dialogBrightnessLabel"
@@ -124,7 +124,7 @@
     app:layout_constraintTop_toTopOf="@id/dialogBrightnessLabel"
     app:layout_constraintEnd_toStartOf="@id/contentGuidelineEnd"
     app:layout_constraintBottom_toBottomOf="@id/dialogBrightnessLabel"
-    tools:text="255" />
+    tools:text="0.00" />
 
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/contentGuidelineStart"
