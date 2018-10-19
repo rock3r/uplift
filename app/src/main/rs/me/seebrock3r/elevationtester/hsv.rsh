@@ -2,46 +2,46 @@
 #define __RS_HSL_RSH__
 
 /*
- * This function was adapted from those at
- * http://dystopiancode.blogspot.co.uk/2012/06/hsv-rgb-conversion-algorithms-in-c.html
- * and from StylingAndroid's repo: https://github.com/StylingAndroid/ColourWheel
+ * This function was adapted from Skia's own SkColor::SkHSVToColor
+ * See https://github.com/google/skia/blob/master/src/core/SkColor.cpp
  */
-static float4 hsv2Argb(float3 hsv, float alpha) {
-    float c = hsv[2] * hsv[1];
-    float x = c * (1.0f - fabs(fmod(hsv[0] / 60.0f, 2) - 1.0f));
-    float m = hsv[2] - hsv[1];
+float tolerance = 1.0f / (1 << 12);
 
-   	float4 argb;
-   	if (hsv[0] >= 0.0f && hsv[0] < 60.0f) {
-   	    argb.r = c + m;
-   	    argb.g = x + m;
-   	    argb.b = m;
-   	} else if (hsv[0] >= 60.0f && hsv[0] < 120.0f) {
-   	    argb.r = x + m;
-   	    argb.g = c + m;
-   	    argb.b = m;
-   	} else if (hsv[0] >= 120.0f && hsv[0] < 180.0f) {
-   	    argb.r = m;
-   	    argb.g = c + m;
-   	    argb.b = x + m;
-   	} else if (hsv[0] >= 180.0f && hsv[0] < 240.0f) {
-   	    argb.r = m;
-   	    argb.g = x + m;
-   	    argb.b = c + m;
-   	} else if (hsv[0] >= 240.0f && hsv[0] < 300.0f) {
-   	    argb.r = x + m;
-   	    argb.g = m;
-   	    argb.b = c + m;
-   	} else if (hsv[0] >= 300.0f && hsv[0] < 360.0f) {
-   	    argb.r = c + m;
-   	    argb.g = m;
-   	    argb.b = x + m;
-   	} else {
-   	    argb.r = m;
-   	    argb.g = m;
-   	    argb.b = m;
-   	}
-    argb.a = alpha;
+static bool nearlyZero(float value) {
+    return fabs(value) < tolerance;
+}
+
+static float4 skiaHsvToArgb(float3 hsv) {
+    float4 argb;
+    argb.a = 1.0f;
+    
+    float s = clamp(hsv.y, 0.0f, 1.0f);
+    float v = clamp(hsv.z, 0.0f, 1.0f);
+
+    if (nearlyZero(s)) {
+        // The color has no saturation and thus is a shade of gray
+        argb.rgb = v;
+        return argb;
+    }
+
+    float h = clamp(hsv.x, 0.0f, 360.0f);
+    float hx = h / 60.0f;
+
+    uchar sector = floor(hx);
+    float sectorOffset = fract(hx);
+
+    float p = (1.0f - s) * v;
+    float q = (1.0f - (s * sectorOffset)) * v;
+    float t = (1.0f - (s * (1.0f - sectorOffset))) * v;
+
+    switch (sector) {
+        case 0:  argb.r = v; argb.g = t; argb.b = p; break;
+        case 1:  argb.r = q; argb.g = v; argb.b = p; break;
+        case 2:  argb.r = p; argb.g = v; argb.b = t; break;
+        case 3:  argb.r = p; argb.g = q; argb.b = v; break;
+        case 4:  argb.r = t; argb.g = p; argb.b = v; break;
+        default: argb.r = v; argb.g = p; argb.b = q; break;
+    }
     return argb;
 }
 

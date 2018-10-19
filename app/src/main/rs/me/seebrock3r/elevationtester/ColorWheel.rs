@@ -27,13 +27,14 @@ uchar4 RS_KERNEL root(uchar4 in, int32_t x, int32_t y) {
     float xOffset = x - centerX;
     float yOffset = y - centerY;
     float centerOffset = hypot(xOffset, yOffset);
+
     if (centerOffset <= radius) {
         float centerAngle = fmod(degrees(atan2(yOffset, xOffset)) + 360.0f, 360.0f);
         float3 colorHsv;
         colorHsv.x = centerAngle;
         colorHsv.y = centerOffset / radius;
         colorHsv.z = brightness;
-        out = rsPackColorTo8888(hsv2Argb(colorHsv, 255.0f));
+        out = rsPackColorTo8888(skiaHsvToArgb(colorHsv));
     } else {
         out = transparent;
     }
