@@ -10,6 +10,7 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.widget.SeekBar
 import androidx.annotation.ColorInt
+import androidx.annotation.FloatRange
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.alpha
 import kotlinx.android.synthetic.main.activity_color_picker.*
@@ -38,7 +39,7 @@ class ColorPickerActivity : AppCompatActivity() {
 
         val color = initialColor
         setupAlphaControls(color)
-        setupBrightnessControls()
+        setupBrightnessControls(color)
         setupColorWheel()
 
         val cornerRadius = resources.getDimensionPixelSize(R.dimen.control_corner_material).toFloat()
@@ -52,6 +53,7 @@ class ColorPickerActivity : AppCompatActivity() {
 
     private fun setupAlphaControls(color: Int) {
         dialogColorAlpha.progress = color.alpha
+        dialogAlphaValue.text = formatAsTwoPlacesDecimal(color.alpha.toFloat() / 255F)
 
         dialogColorAlpha.setOnSeekBarChangeListener(
             object : BetterSeekListener {
@@ -60,14 +62,16 @@ class ColorPickerActivity : AppCompatActivity() {
                     val newSelectedColor = dialogColorWheel.selectedColor.setAlphaTo(progress)
                     dialogColorPreview.backgroundTintList = ColorStateList.valueOf(newSelectedColor)
                     val alpha = progress / dialogColorAlpha.max.toFloat()
-                    dialogAlphaValue.text = "%.2f".format(alpha)
+                    dialogAlphaValue.text = formatAsTwoPlacesDecimal(alpha)
                     dialogColorWheel.onColorChangedListener?.invoke(newSelectedColor)
                 }
             }
         )
     }
 
-    private fun setupBrightnessControls() {
+    private fun setupBrightnessControls(color: Int) {
+        dialogBrightnessValue.text = formatAsTwoPlacesDecimal(color.brightness)
+
         dialogColorBrightness.setOnSeekBarChangeListener(
             object : BetterSeekListener {
                 @SuppressLint("SetTextI18n")
@@ -78,11 +82,13 @@ class ColorPickerActivity : AppCompatActivity() {
 
                     val brightness = progress / dialogColorBrightness.max.toFloat()
                     dialogColorWheel.setBrightness(brightness)
-                    dialogBrightnessValue.text = "%.2f".format(brightness)
+                    dialogBrightnessValue.text = formatAsTwoPlacesDecimal(brightness)
                 }
             }
         )
     }
+
+    private fun formatAsTwoPlacesDecimal(@FloatRange value: Float) = "%.2f".format(value)
 
     private fun setupColorWheel() {
         dialogColorWheel.onColorChangedListener = { _ ->
