@@ -1,6 +1,6 @@
 <resources>
 
-  <style name="Theme.Uplift" parent="Theme.AppCompat.Light.NoActionBar">
+  <style name="Theme.Uplift.Base" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
@@ -11,6 +11,8 @@
     <item name="colorViewStyle">@style/Widget.ColorView</item>
     <item name="colorWheelViewStyle">@style/Widget.ColorWheelView</item>
   </style>
+
+  <style name="Theme.Uplift" parent="Theme.Uplift.Base" />
 
   <!-- Copied from support library's: v7/appcompat/res/values/themes_base.xml -->
   <style name="Theme.Uplift.Dialog" parent="Theme.Uplift">

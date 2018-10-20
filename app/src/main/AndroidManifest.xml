@@ -13,6 +13,7 @@
 
     <activity
       android:name=".MainActivity"
+      android:theme="@style/Theme.Uplift"
       android:screenOrientation="nosensor">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

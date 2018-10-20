@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
@@ -41,7 +42,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main_collapsed)
+        setSupportActionBar(toolbar)
 
         val cornerRadius = resources.getDimensionPixelSize(R.dimen.control_corner_material).toFloat()
         outlineProvider = TweakableOutlineProvider(cornerRadius = cornerRadius, scaleX = 1f, scaleY = 1f, yShift = 0)
@@ -167,6 +170,9 @@ class MainActivity : AppCompatActivity() {
             spotColor.setOnClickListener { onColorPickerClicked(spotColor) }
             ambientColor.onColorChangedListener = ::onColorChanged
             spotColor.onColorChangedListener = ::onColorChanged
+
+            ambientColor.color = Color.BLACK.setAlphaTo((0.039f * 255).toInt())
+            spotColor.color = Color.BLACK.setAlphaTo((0.19f * 255).toInt())
         } else {
             ambientColor.isEnabled = false
             spotColor.isEnabled = false

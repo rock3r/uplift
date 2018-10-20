@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <item
+    android:id="@+id/menu_moar_shadow"
+    android:checkable="true"
+    android:checked="false"
+    android:title="TV mode"
+    android:tooltipText="Android TV mode (MOAR SHADOWS)"
+    app:showAsAction="always|withText" />
+
+</menu>
