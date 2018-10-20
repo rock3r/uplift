@@ -22,5 +22,7 @@
   <string name="brightness_label">Brightness:</string>
   <string name="alpha_label">Alpha:</string>
   <string name="close">Close</string>
+  <string name="menu_title_reset">Reset</string>
+  <string name="menu_tooltip_reset">Reset to defaults</string>
 
 </resources>

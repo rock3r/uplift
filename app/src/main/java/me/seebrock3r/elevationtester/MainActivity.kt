@@ -8,6 +8,8 @@ import android.graphics.Color
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.widget.SeekBar
@@ -266,6 +268,26 @@ class MainActivity : AppCompatActivity() {
             REQUEST_SPOT_COLOR -> ColorPickerActivity.extractResultFrom(data)?.let { selectedColor ->
                 spotColor.color = selectedColor
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_reset) {
+            elevationBar.progress = 8
+            xScaleBar.progress = xScaleBar.max /2
+            yScaleBar.progress = yScaleBar.max /2
+            yShiftBar.progress = yShiftBar.max /2
+            ambientColor.color = Color.BLACK.setAlphaTo((0.039f * 255).toInt())
+            spotColor.color = Color.BLACK.setAlphaTo((0.19f * 255).toInt())
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
         }
     }
 }
