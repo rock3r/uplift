@@ -35,5 +35,6 @@
   <dimen name="panel_content_top_padding">8dp</dimen>
   <dimen name="color_view_value_margin">8dp</dimen>
   <dimen name="color_view_padding">16dp</dimen>
+  <dimen name="info_padding">8dp</dimen>
 
 </resources>

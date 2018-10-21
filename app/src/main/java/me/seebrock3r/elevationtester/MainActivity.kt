@@ -179,6 +179,8 @@ class MainActivity : AppCompatActivity() {
             ambientColor.isEnabled = false
             spotColor.isEnabled = false
         }
+
+        infoButton.setOnClickListener { showInfoDialog() }
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -200,6 +202,10 @@ class MainActivity : AppCompatActivity() {
             R.id.ambientColor -> mainButton.outlineAmbientShadowColor = colorView.color
             R.id.spotColor -> mainButton.outlineSpotShadowColor = colorView.color
         }
+    }
+
+    private fun showInfoDialog() {
+        // TODO
     }
 
     private fun setupDragYToMove() {

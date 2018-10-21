@@ -24,5 +24,6 @@
   <string name="close">Close</string>
   <string name="menu_title_reset">Reset</string>
   <string name="menu_tooltip_reset">Reset to defaults</string>
+  <string name="info_content_description">About Android P shadows tinting</string>
 
 </resources>
