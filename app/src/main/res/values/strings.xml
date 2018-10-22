@@ -26,4 +26,13 @@
   <string name="menu_tooltip_reset">Reset to defaults</string>
   <string name="info_content_description">About Android P shadows tinting</string>
 
+  <string name="elevation_tinting_title">Elevation tinting</string>
+  <string name="elevation_tinting_blurb"><![CDATA[<p>On Android P and later, it is possible to tint the elevation shadows using two new APIs.</p>
+    <p>The effective alpha of the shadow is determined by multiplying the alpha component of the specified colours by the alpha factor defined by
+    the <code>android:ambientShadowAlpha</code> and <code>android:spotShadowAlpha</code> attributes.</p>
+    <p>The default values as of API 28 are <code>ambientShadowAlpha = 0.039</code> (3.9%) and <code>spotShadowAlpha = 0.19</code> (19%). For TV devices
+    the values are <code>0.15</code> and <code>0.3</code> respectively.</p>]]></string>
+  <string name="loading">Loading…</string>
+  <string name="learn_more">Learn more</string>
+
 </resources>

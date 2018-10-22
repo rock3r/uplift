@@ -74,4 +74,21 @@
     <item name="android:textSize">@dimen/seekbar_label_text</item>
   </style>
 
+  <style name="TextAppearance.Uplift.TintingInfo.Title" parent="None">
+    <item name="android:textColor">?android:textColorSecondary</item>
+    <item name="android:textSize">@dimen/tinting_info_title</item>
+    <item name="fontFamily">@font/arvo_bold</item>
+  </style>
+
+  <style name="Uplift.TintingInfo.Blurb" parent="None">
+    <item name="android:lineSpacingExtra">@dimen/tinting_info_blurb_line_spacing_extra</item>
+    <item name="android:textAppearance">@style/TextAppearance.Uplift.TintingInfo.Blurb</item>
+  </style>
+
+  <style name="TextAppearance.Uplift.TintingInfo.Blurb" parent="None">
+    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textSize">@dimen/tinting_info_blurb</item>
+    <item name="fontFamily">@font/arvo_bold</item>
+  </style>
+
 </resources>

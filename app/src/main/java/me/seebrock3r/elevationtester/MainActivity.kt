@@ -205,7 +205,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showInfoDialog() {
-        // TODO
+        ElevationTintingInfoBottomSheet().show(supportFragmentManager, "elevation-info")
     }
 
     private fun setupDragYToMove() {
