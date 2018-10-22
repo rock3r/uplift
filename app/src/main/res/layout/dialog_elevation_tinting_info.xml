@@ -1,62 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:layout_marginStart="8dp"
-  android:layout_marginEnd="8dp"
-  android:background="@drawable/tinting_info_bottomsheet_background"
-  android:clipToPadding="false"
-  android:elevation="12dp"
-  android:padding="16dp">
+  android:padding="@dimen/tinting_info_dialog_padding">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
+  <TextView
+    android:id="@+id/tintingInfoTitle"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="wrap_content"
+    android:text="@string/elevation_tinting_title"
+    android:textAppearance="@style/TextAppearance.Uplift.TintingInfo.Title"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+  <androidx.core.widget.NestedScrollView
+    android:id="@+id/tintingInfoBlurbContainer"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-      android:id="@+id/tintingInfoTitle"
-      android:layout_width="@dimen/match_constraint"
-      android:layout_height="wrap_content"
-      android:text="@string/elevation_tinting_title"
-      android:textAppearance="@style/TextAppearance.Uplift.TintingInfo.Title"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintEnd_toEndOf="parent" />
+    android:layout_height="@dimen/tinting_info_scrolling_container_height"
+    android:layout_marginTop="@dimen/tinting_info_blurb_margin_vertical"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tintingInfoTitle"
+    app:layout_constraintEnd_toEndOf="parent">
 
     <TextView
       android:id="@+id/tintingInfoBlurb"
       style="@style/Uplift.TintingInfo.Blurb"
-      android:layout_width="@dimen/match_constraint"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/elevation_tinting_blurb_margin_top"
-      android:fontFamily="@font/overpass_mono"
       android:text="@string/loading"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tintingInfoTitle"
-      app:layout_constraintEnd_toEndOf="parent"
       tools:text="@string/elevation_tinting_blurb" />
+  </androidx.core.widget.NestedScrollView>
 
-    <Button
-      android:id="@+id/learnMoreButton"
-      style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/learn_more"
-      app:layout_constraintTop_toBottomOf="@id/tintingInfoBlurb"
-      app:layout_constraintEnd_toEndOf="parent" />
+  <Button
+    android:id="@+id/learnMoreButton"
+    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/tinting_info_blurb_margin_vertical"
+    android:text="@string/learn_more"
+    app:layout_constraintTop_toBottomOf="@id/tintingInfoBlurbContainer"
+    app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-      android:id="@+id/closeButton"
-      style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="8dp"
-      android:text="@string/close"
-      app:layout_constraintTop_toBottomOf="@id/tintingInfoBlurb"
-      app:layout_constraintEnd_toStartOf="@+id/learnMoreButton" />
+  <Button
+    android:id="@+id/closeButton"
+    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/tinting_info_infra_buttons_margin"
+    android:text="@string/close"
+    app:layout_constraintEnd_toStartOf="@id/learnMoreButton"
+    app:layout_constraintBaseline_toBaselineOf="@id/learnMoreButton" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

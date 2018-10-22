@@ -7,6 +7,7 @@
     <item name="fontFamily">@font/arvo</item>
     <item name="android:textColorPrimary">@color/textPrimary</item>
     <item name="android:textColorSecondary">@color/textSecondary</item>
+    <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
     <item name="android:windowBackground">@color/windowBackground</item>
     <item name="colorViewStyle">@style/Widget.ColorView</item>
     <item name="colorWheelViewStyle">@style/Widget.ColorWheelView</item>
@@ -32,6 +33,18 @@
     <item name="android:windowContentOverlay">@null</item>
     <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
     <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+  </style>
+
+  <style name="Theme.Uplift.BottomSheet" parent="@style/Theme.Design.Light.BottomSheetDialog">
+    <item name="android:windowIsFloating">false</item>
+    <item name="bottomSheetStyle">@style/Uplift.BottomSheet</item>
+    <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+    <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+  </style>
+
+  <style name="Uplift.BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+    <item name="android:background">@drawable/rounded_corners_bottomsheet_background</item>
+    <item name="behavior_hideable">false</item>
   </style>
 
   <style name="None" />

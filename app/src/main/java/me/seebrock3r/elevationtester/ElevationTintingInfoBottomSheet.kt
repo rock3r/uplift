@@ -31,6 +31,8 @@ class ElevationTintingInfoBottomSheet : BottomSheetDialogFragment(), CoroutineSc
     override val coroutineContext: CoroutineContext
         get() = job!! + Dispatchers.Main
 
+    override fun getTheme() = R.style.Theme_Uplift_BottomSheet
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         job = Job()

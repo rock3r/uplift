@@ -40,7 +40,10 @@
 
   <dimen name="tinting_info_title">20sp</dimen>
   <dimen name="tinting_info_blurb">14sp</dimen>
-  <dimen name="tinting_info_blurb_line_spacing_extra">4sp</dimen>
-  <dimen name="elevation_tinting_blurb_margin_top">16dp</dimen>
+  <dimen name="tinting_info_blurb_line_spacing_extra">5dp</dimen>
+  <dimen name="tinting_info_dialog_padding">12dp</dimen>
+  <dimen name="tinting_info_scrolling_container_height">264dp</dimen>
+  <dimen name="tinting_info_blurb_margin_vertical">16dp</dimen>
+  <dimen name="tinting_info_infra_buttons_margin">8dp</dimen>
 
 </resources>
