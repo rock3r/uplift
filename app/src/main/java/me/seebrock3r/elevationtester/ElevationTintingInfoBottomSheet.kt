@@ -48,7 +48,7 @@ class ElevationTintingInfoBottomSheet : BottomSheetDialogFragment(), CoroutineSc
     }
 
     private fun openLearnMore() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://medium.com/@seebrock3r/playing-with-elevation-in-android-again-36b901287249"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://tips.seebrock3r.me/playing-with-elevation-in-android-part-1-36b901287249"))
         startActivity(intent)
     }
 
