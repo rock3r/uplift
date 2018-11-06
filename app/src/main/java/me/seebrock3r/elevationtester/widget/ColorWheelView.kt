@@ -18,8 +18,8 @@ import androidx.annotation.Px
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.minus
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import me.seebrock3r.elevationtester.R
 
 /*
