@@ -7,8 +7,8 @@
     motion:duration="200">
 
     <OnClick
-      motion:target="@+id/panelHeader"
-      motion:mode="toggle" />
+      motion:motionTarget="@+id/panelHeader"
+      motion:clickAction="toggle" />
   </Transition>
 
 </MotionScene>

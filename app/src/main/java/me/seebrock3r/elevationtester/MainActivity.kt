@@ -68,6 +68,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupPanelHeaderControls() {
         rootContainer.setTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+                // No-op
+            }
+
+            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+                // No-op
+            }
+
             override fun onTransitionChange(view: MotionLayout, startState: Int, endState: Int, progress: Float) {
                 // No-op
             }
