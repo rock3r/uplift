@@ -22,6 +22,6 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.0.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha4'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 }
