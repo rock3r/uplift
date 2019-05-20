@@ -17,6 +17,9 @@
 
     <Constraint
       android:id="@id/panelContentTopGuideline"
+      android:layout_width="@dimen/match_constraint"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
       app:layout_constraintGuide_percent="0.5" />
 
   </ConstraintSet>
@@ -24,14 +27,10 @@
   <Transition
     app:constraintSetStart="@id/constraints_main_collapsed"
     app:constraintSetEnd="@id/constraints_main_expanded"
-    app:duration="200">
+    app:duration="200" />
 
-    <OnClick
-      android:layout_width="@dimen/match_constraint"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      app:targetId="@+id/panelHeader"
-      app:clickAction="toggle" />
-  </Transition>
+  <OnClick
+    app:targetId="@id/panelHeader"
+    app:clickAction="toggle" />
 
 </MotionScene>
