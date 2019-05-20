@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -18,9 +19,10 @@ import androidx.annotation.Px
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.motion.widget.MotionScene
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.transition.TransitionManager
-import kotlinx.android.synthetic.main.activity_main_collapsed.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_header.*
 import kotlinx.android.synthetic.main.include_panel_controls.*
 import me.seebrock3r.elevationtester.widget.BetterSeekListener
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main_collapsed)
+        setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
         val cornerRadius = resources.getDimensionPixelSize(R.dimen.control_corner_material).toFloat()
@@ -68,12 +70,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupPanelHeaderControls() {
         rootContainer.setTransitionListener(object : MotionLayout.TransitionListener {
-            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+            override fun allowsTransition(transition: MotionScene.Transition): Boolean {
+                return true
+            }
+
+            override fun onTransitionTrigger(view: MotionLayout, triggerId: Int, positive: Boolean, progress: Float) {
                 // No-op
             }
 
-            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+            override fun onTransitionStarted(view: MotionLayout, startId: Int, endId: Int) {
                 // No-op
+                Log.i("!!!!!", "onTransitionStarted")
             }
 
             override fun onTransitionChange(view: MotionLayout, startState: Int, endState: Int, progress: Float) {
@@ -81,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTransitionCompleted(view: MotionLayout, state: Int) {
-                panelExpanded = state == R.layout.activity_main_expanded
+                panelExpanded = state == R.id.constraints_main_expanded
                 TransitionManager.beginDelayedTransition(view)
                 if (panelExpanded) panelExpanded() else panelCollapsed()
             }
@@ -292,17 +299,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_reset) {
-            elevationBar.progress = 8
-            xScaleBar.progress = xScaleBar.max /2
-            yScaleBar.progress = yScaleBar.max /2
-            yShiftBar.progress = yShiftBar.max /2
-            ambientColor.color = Color.BLACK.setAlphaTo((0.039f * 255).toInt())
-            spotColor.color = Color.BLACK.setAlphaTo((0.19f * 255).toInt())
-            return true
-        } else {
+        if (item.itemId != R.id.menu_reset) {
             return super.onOptionsItemSelected(item)
         }
+        
+        elevationBar.progress = 8
+        xScaleBar.progress = xScaleBar.max /2
+        yScaleBar.progress = yScaleBar.max /2
+        yShiftBar.progress = yShiftBar.max /2
+        ambientColor.color = Color.BLACK.setAlphaTo((0.039f * 255).toInt())
+        spotColor.color = Color.BLACK.setAlphaTo((0.19f * 255).toInt())
+        return true
     }
 }
 
