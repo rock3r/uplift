@@ -19,7 +19,6 @@ import androidx.annotation.Px
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.motion.widget.MotionScene
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.transition.TransitionManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -70,9 +69,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupPanelHeaderControls() {
         rootContainer.setTransitionListener(object : MotionLayout.TransitionListener {
-            override fun allowsTransition(transition: MotionScene.Transition): Boolean {
-                return true
-            }
 
             override fun onTransitionTrigger(view: MotionLayout, triggerId: Int, positive: Boolean, progress: Float) {
                 // No-op
