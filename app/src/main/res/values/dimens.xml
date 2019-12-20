@@ -26,7 +26,7 @@
   <dimen name="value_label_margin_bottom">8dp</dimen>
   <dimen name="seekbar_margin_bottom">24dp</dimen>
 
-  <dimen name="panel_elevation">5dp</dimen>
+  <dimen name="panel_elevation">@dimen/panel_header_elevation</dimen>
   <dimen name="panel_header_elevation">8dp</dimen>
   <dimen name="panel_padding_top">24dp</dimen>
   <dimen name="panel_header_text">14sp</dimen>
