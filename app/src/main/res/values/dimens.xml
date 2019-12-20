@@ -46,4 +46,7 @@
   <dimen name="tinting_info_blurb_margin_vertical">16dp</dimen>
   <dimen name="tinting_info_infra_buttons_margin">8dp</dimen>
 
+  <dimen name="onboarding_icon_nudge_y_delta">8dp</dimen>
+  <item name="onboarding_icon_peek_motion_progress" format="float" type="dimen">0.2</item>
+
 </resources>

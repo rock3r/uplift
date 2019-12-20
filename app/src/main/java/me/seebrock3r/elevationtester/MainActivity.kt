@@ -1,5 +1,7 @@
 package me.seebrock3r.elevationtester
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
@@ -9,10 +11,12 @@ import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.Interpolator
 import android.widget.SeekBar
 import androidx.annotation.DimenRes
 import androidx.annotation.Px
@@ -20,13 +24,16 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.animation.doOnEnd
 import androidx.transition.TransitionManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_header.*
 import kotlinx.android.synthetic.main.include_panel_controls.*
 import me.seebrock3r.elevationtester.widget.BetterSeekListener
 import me.seebrock3r.elevationtester.widget.ColorView
+import kotlin.math.PI
 import kotlin.math.roundToInt
+import kotlin.math.sin
 
 private const val REQUEST_AMBIENT_COLOR = 7367
 private const val REQUEST_SPOT_COLOR = 7368
@@ -298,14 +305,68 @@ class MainActivity : AppCompatActivity() {
         if (item.itemId != R.id.menu_reset) {
             return super.onOptionsItemSelected(item)
         }
-        
+
         elevationBar.progress = 8
-        xScaleBar.progress = xScaleBar.max /2
-        yScaleBar.progress = yScaleBar.max /2
-        yShiftBar.progress = yShiftBar.max /2
+        xScaleBar.progress = xScaleBar.max / 2
+        yScaleBar.progress = yScaleBar.max / 2
+        yShiftBar.progress = yShiftBar.max / 2
         ambientColor.color = Color.BLACK.setAlphaTo((0.039f * 255).toInt())
         spotColor.color = Color.BLACK.setAlphaTo((0.19f * 255).toInt())
         return true
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val onboardingPreferences = OnboardingPreferences(this)
+        if (onboardingPreferences.shouldShowOnboarding) {
+            showOnboarding()
+            onboardingPreferences.storeOnboardingShown()
+        }
+    }
+
+    private fun showOnboarding() {
+        val bounceDeltaY = resources.getDimensionPixelSize(R.dimen.onboarding_icon_nudge_y_delta).toFloat()
+        val peekMotionProgress = resources.getFloatValue(R.dimen.onboarding_icon_peek_motion_progress)
+
+        val animationDuration = resources.getInteger(R.integer.onboarding_anim_entry_duration).toLong()
+        val delayDuration = resources.getInteger(R.integer.onboarding_anim_delay_duration).toLong()
+
+        rootContainer.isEnabled = false
+
+        AnimatorSet().apply {
+            val caretBounce = ObjectAnimator.ofFloat(expandCollapseImage, "translationY", 0F, -bounceDeltaY).apply {
+                interpolator = MyBounceInterpolator()
+                duration = animationDuration
+            }
+
+            val panelPeek = ObjectAnimator.ofFloat(rootContainer, "interpolatedProgress", 0F, peekMotionProgress).apply {
+                interpolator = MyBounceInterpolator()
+                duration = animationDuration
+                startDelay = delayDuration
+            }
+
+            play(caretBounce)
+                .after(delayDuration)
+                .with(panelPeek)
+
+            doOnEnd { rootContainer.isEnabled = true }
+
+            start()
+        }
+    }
+}
+
+private fun Resources.getFloatValue(@DimenRes resourceId: Int): Float {
+    val outValue = TypedValue()
+    getValue(resourceId, outValue, true)
+    return outValue.float
+}
+
+class MyBounceInterpolator(private val frequency: Double = PI) : Interpolator {
+
+    override fun getInterpolation(time: Float): Float {
+        return (sin(frequency * time)).toFloat()
     }
 }
 

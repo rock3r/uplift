@@ -5,5 +5,7 @@
   <integer name="animation_duration_drag_end">200</integer>
   <integer name="max_alpha_progress">255</integer>
   <integer name="max_brightness_progress">255</integer>
+  <integer name="onboarding_anim_entry_duration">700</integer>
+  <integer name="onboarding_anim_delay_duration">250</integer>
 
 </resources>
