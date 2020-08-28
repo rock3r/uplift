@@ -8,12 +8,12 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:4.0.0")
+        classpath("com.android.tools.build:gradle:4.0.1")
     }
 }
 
 plugins {
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version "1.4.0"
 }
 
 allprojects {
@@ -37,8 +37,8 @@ allprojects {
     }
 }
 
-val kotlinVersion = "1.3.72"
-val coroutinesVersion = "1.3.7"
+val kotlinVersion = "1.4.0"
+val coroutinesVersion = "1.3.9"
 
 subprojects {
     apply(plugin = "com.android.application")
