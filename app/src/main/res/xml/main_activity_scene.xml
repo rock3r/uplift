@@ -27,14 +27,12 @@
   <Transition
     app:constraintSetStart="@id/constraints_main_collapsed"
     app:constraintSetEnd="@id/constraints_main_expanded"
-    app:motionInterpolator="linear"
+    app:motionInterpolator="easeInOut"
     app:duration="200">
 
-    <OnSwipe
-      app:touchAnchorId="@id/panelHeader"
-      app:touchAnchorSide="top"              
-      app:onTouchUp="autoComplete"
-      app:dragDirection="dragUp"/>
+    <OnClick
+      app:clickAction="toggle"
+      app:targetId="@id/panelHeader" />
 
   </Transition>
 
