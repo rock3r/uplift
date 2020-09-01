@@ -1,13 +1,12 @@
 android {
-    compileSdkVersion(29)
-    buildToolsVersion("29.0.3")
+    compileSdkVersion(30)
 
     defaultConfig {
         applicationId = "me.seebrock3r.elevationtester"
         minSdkVersion(21)
-        targetSdkVersion(29)
-        versionCode = 6
-        versionName = "3.2.1"
+        targetSdkVersion(30)
+        versionCode = 7
+        versionName = "3.2.2"
     }
 
     packagingOptions {
