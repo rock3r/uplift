@@ -14,7 +14,9 @@ schedule screen, which uses a custom `OutlineProvider` to cast shadows for the c
 like diffuse shadows (although they're very much still the area shadow that the Material guidelines
 specify, there is no custom drawing code there).
 
-For more details, you can refer to the [accompanying blogpost](https://blog.usejournal.com/playing-with-elevation-in-android-91af4f3be596).
+For more details, you can refer to the [accompanying blogpost](https://blog.sebastiano.dev/playing-with-elevation-in-android/),
+and to the follow up posts for Android P: [part 1](https://blog.sebastiano.dev/playing-with-elevation-in-android-part-1/) and
+[part 2](https://blog.sebastiano.dev/playing-with-elevation-in-android-part-2/).
 
 ### Tinting shadows (Android P+)
 
@@ -25,7 +27,7 @@ that is defined by the `ambientShadowAlpha` and `spotShadowAlpha` theme attribut
 default to `0.039` for ambient shadows and `0.19` for spot shadows.
 
 If you want to learn more about it, and learn how to bypass these limitations, you can refer to the
-dedicated blog posts, starting with the [first part](https://tips.seebrock3r.me/playing-with-elevation-in-android-part-1-36b901287249). 
+dedicated blog posts, starting with the [first part](https://blog.sebastiano.dev/playing-with-elevation-in-android-part-1/). 
 
 ## More on Uplift
 You can test Uplift by downloading it from the [Play Store](https://play.google.com/store/apps/details?id=me.seebrock3r.elevationtester)
