@@ -12,6 +12,12 @@ android {
     packagingOptions {
         exclude("META-INF/atomicfu.kotlin_module")
     }
+
+    buildTypes {
+        named("release") {
+            isMinifyEnabled = false
+        }
+    }
 }
 
 repositories {
