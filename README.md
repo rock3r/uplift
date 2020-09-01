@@ -38,3 +38,6 @@ or get the apk from the [Releases tab](https://github.com/rock3r/elevation-teste
 ## Licence
 
 See the [`LICENSE`](LICENSE) file. tl;dr it's Apache 2.0.
+
+The app uses Alessandro Crugnola's [`android-target-tooltip`](https://github.com/sephiroth74/android-target-tooltip) library for
+the onboarding, which is licensed under the MIT license.

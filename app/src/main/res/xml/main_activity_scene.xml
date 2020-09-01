@@ -11,6 +11,16 @@
       android:orientation="horizontal"
       app:layout_constraintGuide_percent="1.0" />
 
+    <Constraint
+      android:id="@+id/panelContainerFade"
+      android:layout_width="@dimen/match_constraint"
+      android:layout_height="@dimen/match_constraint"
+      android:alpha="1.0"
+      app:layout_constraintStart_toStartOf="@id/panelContainer"
+      app:layout_constraintTop_toTopOf="@id/panelContainer"
+      app:layout_constraintEnd_toEndOf="@id/panelContainer"
+      app:layout_constraintBottom_toBottomOf="@id/panelContainer" />
+
   </ConstraintSet>
 
   <ConstraintSet android:id="@+id/constraints_main_expanded">
@@ -22,6 +32,16 @@
       android:orientation="horizontal"
       app:layout_constraintGuide_percent="0.5" />
 
+    <Constraint
+      android:id="@+id/panelContainerFade"
+      android:layout_width="@dimen/match_constraint"
+      android:layout_height="@dimen/match_constraint"
+      android:alpha="0.0"
+      app:layout_constraintStart_toStartOf="@id/panelContainer"
+      app:layout_constraintTop_toTopOf="@id/panelContainer"
+      app:layout_constraintEnd_toEndOf="@id/panelContainer"
+      app:layout_constraintBottom_toBottomOf="@id/panelContainer" />
+
   </ConstraintSet>
 
   <Transition
@@ -32,9 +52,9 @@
 
     <OnSwipe
       app:touchAnchorId="@id/panelHeader"
-      app:touchAnchorSide="top"              
+      app:touchAnchorSide="top"
       app:onTouchUp="autoComplete"
-      app:dragDirection="dragUp"/>
+      app:dragDirection="dragUp" />
 
   </Transition>
 

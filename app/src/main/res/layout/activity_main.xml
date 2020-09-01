@@ -67,6 +67,17 @@
 
   </androidx.core.widget.NestedScrollView>
 
+  <View
+    android:id="@+id/panelContainerFade"
+    android:layout_width="@dimen/match_constraint"
+    android:layout_height="@dimen/match_constraint"
+    android:background="@color/white"
+    android:elevation="@dimen/panel_elevation"
+    app:layout_constraintStart_toStartOf="@id/panelContainer"
+    app:layout_constraintTop_toTopOf="@id/panelContainer"
+    app:layout_constraintEnd_toEndOf="@id/panelContainer"
+    app:layout_constraintBottom_toBottomOf="@id/panelContainer" />
+
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/panelContentTopGuideline"
     android:layout_width="@dimen/match_constraint"

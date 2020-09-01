@@ -36,5 +36,6 @@
     just by varying the shadow colours’ alphas.</p>]]></string>
   <string name="loading">Loading…</string>
   <string name="learn_more">Learn more</string>
+  <string name="onboarding_tooltip">Drag up to reveal controls</string>
 
 </resources>

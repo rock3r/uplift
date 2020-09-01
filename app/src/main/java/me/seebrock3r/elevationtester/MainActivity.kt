@@ -2,6 +2,7 @@ package me.seebrock3r.elevationtester
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
@@ -10,7 +11,6 @@ import android.graphics.Color
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
@@ -25,7 +25,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.doOnEnd
+import androidx.core.content.res.ResourcesCompat
 import androidx.transition.TransitionManager
+import it.sephiroth.android.library.xtooltip.ClosePolicy
+import it.sephiroth.android.library.xtooltip.Tooltip
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_header.*
 import kotlinx.android.synthetic.main.include_panel_controls.*
@@ -83,7 +86,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTransitionStarted(view: MotionLayout, startId: Int, endId: Int) {
                 // No-op
-                Log.i("!!!!!", "onTransitionStarted")
             }
 
             override fun onTransitionChange(view: MotionLayout, startState: Int, endState: Int, progress: Float) {
@@ -226,6 +228,7 @@ class MainActivity : AppCompatActivity() {
         ElevationTintingInfoBottomSheet().show(supportFragmentManager, "elevation-info")
     }
 
+    @SuppressLint("ClickableViewAccessibility") // Shut up Lint, I need a draggy thing
     private fun setupDragYToMove() {
         buttonVerticalMarginPixel = resources.getDimensionPixelSize(R.dimen.main_button_vertical_margin)
 
@@ -350,7 +353,17 @@ class MainActivity : AppCompatActivity() {
                 .after(delayDuration)
                 .with(panelPeek)
 
-            doOnEnd { rootContainer.isEnabled = true }
+            doOnEnd {
+                rootContainer.isEnabled = true
+                Tooltip.Builder(this@MainActivity)
+                    .anchor(panelHeader, yoff = -panelHeader.height / 2)
+                    .text(R.string.onboarding_tooltip)
+                    .typeface(ResourcesCompat.getFont(this@MainActivity, R.font.arvo))
+                    .arrow(true)
+                    .closePolicy(ClosePolicy.TOUCH_ANYWHERE_NO_CONSUME)
+                    .create()
+                    .show(panelHeader, Tooltip.Gravity.TOP, fitToScreen = true)
+            }
 
             start()
         }

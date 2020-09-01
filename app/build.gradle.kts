@@ -14,10 +14,15 @@ android {
     }
 }
 
+repositories {
+    maven { setUrl("https://jitpack.io") }
+}
+
 dependencies {
     implementation("androidx.annotation:annotation:1.1.0")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
     implementation("com.google.android.material:material:1.2.0")
+    implementation("com.github.sephiroth74:android-target-tooltip:2.0.4")
 }
